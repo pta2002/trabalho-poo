@@ -2,7 +2,7 @@ package com.footballmanager.jogador;
 
 import java.util.Objects;
 
-public class Jogador {
+public abstract class Jogador {
     private String nome;
 
     private double velocidade;
@@ -12,7 +12,6 @@ public class Jogador {
     private double jogoDeCabeca;
     private double remate;
     private double capacidadeDePasse;
-    private double habilidade;
 
     public String getNome() {
         return nome;
@@ -78,13 +77,7 @@ public class Jogador {
         this.capacidadeDePasse = capacidadeDePasse;
     }
 
-    public double getHabilidade() {
-        return habilidade;
-    }
-
-    public void setHabilidade(double habilidade) {
-        this.habilidade = habilidade;
-    }
+    public abstract double getHabilidade();
 
     public Jogador(String nome, double velocidade, double resistencia, double destreza, double impulsao, double jogoDeCabeca, double remate, double capacidadeDePasse, double habilidade) {
         this.nome = nome;
@@ -95,7 +88,6 @@ public class Jogador {
         this.jogoDeCabeca = jogoDeCabeca;
         this.remate = remate;
         this.capacidadeDePasse = capacidadeDePasse;
-        this.habilidade = habilidade;
     }
 
     @Override
