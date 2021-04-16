@@ -89,7 +89,16 @@ public abstract class Jogador {
         this.remate = remate;
         this.capacidadeDePasse = capacidadeDePasse;
     }
-
+    public Jogador(Jogador jog) {
+        this.nome = jog.getNome();
+        this.velocidade = jog.getVelocidade();
+        this.resistencia = jog.getResistencia();
+        this.destreza = jog.getDestreza();
+        this.impulsao = jog.getImpulsao();
+        this.jogoDeCabeca = jog.getJogoDeCabeca();
+        this.remate = jog.getRemate();
+        this.capacidadeDePasse = jog.getCapacidadeDePasse();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,7 +106,6 @@ public abstract class Jogador {
         Jogador jogador = (Jogador) o;
         return Double.compare(jogador.getVelocidade(), getVelocidade()) == 0 && Double.compare(jogador.getResistencia(), getResistencia()) == 0 && Double.compare(jogador.getDestreza(), getDestreza()) == 0 && Double.compare(jogador.getImpulsao(), getImpulsao()) == 0 && Double.compare(jogador.getJogoDeCabeca(), getJogoDeCabeca()) == 0 && Double.compare(jogador.getRemate(), getRemate()) == 0 && Double.compare(jogador.getCapacidadeDePasse(), getCapacidadeDePasse()) == 0 && Double.compare(jogador.getHabilidade(), getHabilidade()) == 0 && getNome().equals(jogador.getNome());
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(getNome(), getVelocidade(), getResistencia(), getDestreza(), getImpulsao(), getJogoDeCabeca(), getRemate(), getCapacidadeDePasse(), getHabilidade());

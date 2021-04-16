@@ -1,4 +1,6 @@
-package com.footballmanager.jogador;
+package com.footballmanager.jogador.guardaRedes;
+
+import com.footballmanager.jogador.Jogador;
 
 public class GuardaRedes extends Jogador {
     private double elasticidade;
