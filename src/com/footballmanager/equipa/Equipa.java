@@ -61,4 +61,8 @@ public class Equipa {
    public int hashCode() {
       return Objects.hash(getNome(), getLocalEstadio(), getJogadores());
    }
+
+   public double overall() {
+      return 0;
+   }
 }
