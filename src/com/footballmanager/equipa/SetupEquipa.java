@@ -1,13 +1,12 @@
 package com.footballmanager.equipa;
 
+import com.footballmanager.jogador.*;
+import com.footballmanager.jogo.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.footballmanager.jogador.Jogador;
-import com.footballmanager.jogo.ModeloTatico;
 
 public class SetupEquipa {
-
     private Equipa equipa;
     private ModeloTatico modeloTatico;
     private List<Jogador> titulares;
@@ -17,7 +16,7 @@ public class SetupEquipa {
     public SetupEquipa(Equipa equipa) {
         this.modeloTatico = ModeloTatico.getRandomModeloTatico();
         Random rand = new Random();
-        List<Jogador> list = new ArrayList<>(equipa.getJogadores());
+        ArrayList list = new ArrayList<>(equipa.getJogadores());
         Collections.shuffle(list);
         this.titulares = list.subList(0,11);
         this.emCampo = this.titulares;
@@ -43,23 +42,23 @@ public class SetupEquipa {
     }
 
     public void setTitulares(List<Jogador> titulares) {
-        this.titulares = titulares;
+        this.titulares = titulares.stream().map(Jogador::clone).collect(Collectors.toList());
     }
 
     public List<Jogador> getEmCampo() {
-        return emCampo;
+            return emCampo.stream().map(Jogador::clone).collect(Collectors.toList());
     }
 
     public void setEmCampo(List<Jogador> emCampo) {
-        this.emCampo = emCampo;
+        this.emCampo = emCampo.stream().map(Jogador::clone).collect(Collectors.toList());
     }
 
     public List<Jogador> getNoBanco() {
-        return noBanco;
+        return noBanco.stream().map(Jogador::clone).collect(Collectors.toList());
     }
 
     public void setNoBanco(List<Jogador> noBanco) {
-        this.noBanco = noBanco;
+        this.noBanco = noBanco.stream().map(Jogador::clone).collect(Collectors.toList());
     }
 
     public ModeloTatico getModeloTatico() {
@@ -74,7 +73,7 @@ public class SetupEquipa {
     }
 
     public void setEquipa(Equipa equipa) {
-        this.equipa = equipa;
+        this.equipa = equipa.clone();
     }
     @Override
     public boolean equals(Object o) {

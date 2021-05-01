@@ -1,11 +1,10 @@
 package com.footballmanager.equipa;
 
-import com.footballmanager.jogador.Jogador;
-import com.footballmanager.jogo.ModeloTatico;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.footballmanager.jogador.Jogador;
+
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Equipa {
@@ -13,7 +12,7 @@ public class Equipa {
    String localEstadio;
    List<Jogador> jogadores;
 
-   public Equipa(Equipa equipa) {
+   Equipa(Equipa equipa) {
       this.nome = equipa.getNome();
       this.localEstadio = equipa.getLocalEstadio();
       this.jogadores = equipa.getJogadores();
@@ -45,9 +44,21 @@ public class Equipa {
    }
 
    public void setJogadores(List<Jogador> jogadores) {
-      this.jogadores = jogadores;
+      this.jogadores = jogadores.stream().map(Jogador::clone).collect(Collectors.toList());
    }
    public SetupEquipa setup() {
        return new SetupEquipa(this);
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      Equipa equipa = (Equipa) o;
+      return Objects.equals(getNome(), equipa.getNome()) && Objects.equals(getLocalEstadio(), equipa.getLocalEstadio()) && Objects.equals(getJogadores(), equipa.getJogadores());
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(getNome(), getLocalEstadio(), getJogadores());
    }
 }
