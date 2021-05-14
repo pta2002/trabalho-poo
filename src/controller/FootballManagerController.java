@@ -13,6 +13,7 @@ public class FootballManagerController extends Menu {
 
     @Override
     public void executa(FootballManagerModel model) {
+        EquipaController equipaController;
             do {
                 showMenu();
                 this.op = lerOpcao();
@@ -22,11 +23,15 @@ public class FootballManagerController extends Menu {
                         jogadoresController.executa(model);
                         break;
                     case 2:
+                        equipaController = new EquipaController();
+                        equipaController.criarEquipa(model);
                         break;
                     case 3:
+                        TransferenciasController transferenciasController = new TransferenciasController();
+                        transferenciasController.executa(model);
                         break;
                     case 4:
-                        EquipaController equipaController = new EquipaController(new String[]{"Ver Jogadores", "Ver overall"});
+                        equipaController = new EquipaController(new String[]{"Ver Jogadores", "Ver overall"});
                         equipaController.executa(model);
                         break;
                 }

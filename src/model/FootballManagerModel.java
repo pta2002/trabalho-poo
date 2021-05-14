@@ -103,4 +103,10 @@ public class FootballManagerModel {
     public Boolean existeEquipa(String equipa ) {
       return this.equipas.containsKey(equipa);
     }
+
+    /* ---------------------------------------------------------- Adiciona uma nova equipa no HashMap*/
+    public void insereEquipa(String equipa) {
+        Equipa novaEquipa = new Equipa(equipa);
+        this.equipas.put(equipa,novaEquipa);
+    }
 }

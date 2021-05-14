@@ -70,6 +70,27 @@ public class Equipa {
         return total/cont;
     }
 
+    public boolean existeJogador(int numero) {
+        boolean existe = false;
+        for (Jogador jogador: this.jogadores) {
+            if (jogador.getNumeroJogador() == numero) existe = true;
+        }
+
+        return existe;
+    }
+
+    public Jogador getJogador(int numero) {
+        for (Jogador jogador: this.jogadores) {
+            if (jogador.getNumeroJogador() == numero) return jogador;
+        }
+
+        return null;
+    }
+
+    public void removeJogador(Jogador jogador) {
+        this.jogadores.remove(jogador);
+    }
+
     /* ----------------------------------------------------------- Clone */
     @Override
     public Equipa clone() {

@@ -4,10 +4,17 @@ import model.FootballManagerModel;
 import view.EquipaView;
 import view.JogadoresView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class EquipaController extends Menu {
+
+    public EquipaController() {
+        super.opcoes = new ArrayList<>();
+        super.op = 0;
+    }
 
     public EquipaController(String[] opcoes) {
         super.opcoes = Arrays.asList(opcoes);
@@ -17,15 +24,15 @@ public class EquipaController extends Menu {
     @Override
     public void executa(FootballManagerModel model) {
         Scanner is = new Scanner(System.in);
-        JogadoresView jview = new JogadoresView();
         EquipaView view = new EquipaView();
         do {
-            view.equipaMenu(1);
+            view.border(1);
+            view.mensagens(1);
             StringBuilder equipa = new StringBuilder();
             equipa.append(is.nextLine());
 
             while (model.existeEquipa(equipa.toString()) == false) {
-                jview.errosJogador(1);
+                view.errosEquipa(1);
                 equipa.delete(0,equipa.length());
                 equipa.append(is.nextLine());
             }
@@ -44,5 +51,23 @@ public class EquipaController extends Menu {
                 default:break;
             }
         } while (this.op != 0);
+    }
+
+    public void criarEquipa(FootballManagerModel model) {
+        EquipaView view = new EquipaView();
+        view.border(2);
+        view.mensagens(2);
+
+        Scanner is = new Scanner(System.in);
+        StringBuilder equipa = new StringBuilder();
+        equipa.append(is.nextLine());
+
+        while (model.existeEquipa(equipa.toString()) == true) {
+            view.errosEquipa(2);
+            equipa.delete(0,equipa.length());
+            equipa.append(is.nextLine());
+        }
+
+        model.insereEquipa(equipa.toString());
     }
 }

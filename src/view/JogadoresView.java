@@ -2,7 +2,7 @@ package view;
 
 public class JogadoresView {
 
-    public void CriarJogadorMenu(int opcao) {
+    public void mensagens(int opcao) {
         switch (opcao) {
             case 1:
                 System.out.println("Nome do Jogador:");break;
@@ -39,7 +39,7 @@ public class JogadoresView {
     public void errosJogador(int op) {
         switch (op) {
             case 1:
-                System.out.println("(ERROR - Equipa não existe) Insira uma equipa válida");
+                System.out.println("(ERROR - Jogador inexistente) Insira um jogador válido ");
                 break;
             case 2:
                 System.out.println("(ERROR - Posição não existe) Insira uma Posição válida");
