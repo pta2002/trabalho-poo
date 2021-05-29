@@ -34,6 +34,10 @@ public class FootballManagerController extends Menu {
                         equipaController = new EquipaController(new String[]{"Ver Jogadores", "Ver overall"});
                         equipaController.executa(model);
                         break;
+                    case 5:
+                        JogoController jogoController = new JogoController();
+                        jogoController.executa(model);
+                        break;
                 }
             } while (this.op != 0);
         }

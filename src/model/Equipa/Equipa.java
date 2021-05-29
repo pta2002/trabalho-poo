@@ -3,27 +3,30 @@ package model.Equipa;
 import model.Jogador.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Equipa {
     /* ----------------------------------------------------------- Atributos */
     private String nome;
-    private List<Jogador> jogadores;
+
+    private Map<Integer,Jogador> jogadores;
 
     /* ----------------------------------------------------------- Construtores */
-    public Equipa(String nomeE) {
-        nome=nomeE;
-        jogadores = new ArrayList<>();
+    public Equipa(String nomeEquipa) {
+        nome=nomeEquipa;
+        jogadores = new HashMap<>();
     }
 
     public Equipa(Equipa equipa) {
         this.nome = equipa.getNome();
 
-        List<Jogador> jogadores = new ArrayList<>();
-        for (Jogador jogador: equipa.jogadores) {
-            jogadores.add(jogador.clone());
+        HashMap<Integer,Jogador> jogadores = new HashMap<>();
+        for (Map.Entry<Integer,Jogador> e: equipa.jogadores.entrySet()) {
+            jogadores.put(e.getKey(),e.getValue().clone());
         }
-
         this.jogadores = jogadores;
     }
 
@@ -34,7 +37,7 @@ public class Equipa {
     }
 
     public void insereJogador(Jogador j) {
-        jogadores.add(j.clone());
+        jogadores.put(j.getNumeroJogador(),j.clone());
     }
 
     public String getNome(){
@@ -44,7 +47,7 @@ public class Equipa {
     public double getDefesaOverall() {
         double total = 0;
         int cont = 0;
-        for (Jogador jogador : this.jogadores) {
+        for (Jogador jogador : this.jogadores.values()) {
             if (jogador instanceof Defesa) {total += ((Defesa) jogador).getHabilidade(); cont++;}
             if (jogador instanceof Lateral) {total += ((Lateral) jogador).getHabilidade(); cont++;}
             if (jogador instanceof GuardaRedes) {total += ((GuardaRedes) jogador).getHabilidade(); cont++;}
@@ -55,7 +58,7 @@ public class Equipa {
     public double getMediosOverall() {
         double total = 0;
         int cont = 0;
-        for (Jogador jogador : this.jogadores) {
+        for (Jogador jogador : this.jogadores.values()) {
             if (jogador instanceof Medio) {total += ((Medio) jogador).getHabilidade(); cont++;}
         }
         return total/cont;
@@ -64,7 +67,7 @@ public class Equipa {
     public double getAvancadosOverall() {
         double total = 0;
         int cont = 0;
-        for (Jogador jogador : this.jogadores) {
+        for (Jogador jogador : this.jogadores.values()) {
             if (jogador instanceof Avancado) {total += ((Avancado) jogador).getHabilidade(); cont++;}
         }
         return total/cont;
@@ -72,7 +75,7 @@ public class Equipa {
 
     public boolean existeJogador(int numero) {
         boolean existe = false;
-        for (Jogador jogador: this.jogadores) {
+        for (Jogador jogador: this.jogadores.values()) {
             if (jogador.getNumeroJogador() == numero) existe = true;
         }
 
@@ -80,7 +83,7 @@ public class Equipa {
     }
 
     public Jogador getJogador(int numero) {
-        for (Jogador jogador: this.jogadores) {
+        for (Jogador jogador: this.jogadores.values()) {
             if (jogador.getNumeroJogador() == numero) return jogador;
         }
 
@@ -88,7 +91,7 @@ public class Equipa {
     }
 
     public void removeJogador(Jogador jogador) {
-        this.jogadores.remove(jogador);
+        this.jogadores.remove(jogador.getNumeroJogador());
     }
 
     /* ----------------------------------------------------------- Clone */
@@ -100,11 +103,17 @@ public class Equipa {
     /* ----------------------------------------------------------- toString */
     @Override
     public String toString(){
-        String r =  "Equipa:" + nome + "\n";
-        for (Jogador j : jogadores){
-            r += j.toString();
+        StringBuilder r = new StringBuilder("Equipa:" + nome + "\n");
+        for (Jogador j : jogadores.values()){
+            r.append(j.toString());
         }
-        return r;
+        return r.toString();
+    }
+    public List<Jogador> getJogadores() {
+        return this.jogadores.values().stream().map(Jogador::clone).collect(Collectors.toList());
+    }
+    public void setJogadores(List<Jogador> jgs) {
+        jgs.forEach(x -> this.jogadores.put(x.getNumeroJogador(),x));
     }
 
 }

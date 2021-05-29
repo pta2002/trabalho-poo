@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class FootballManagerModel {
     /* ----------------------------------------------------------- Atributos */
@@ -32,13 +33,9 @@ public class FootballManagerModel {
         this.equipas = new HashMap<>();
         this.jogos = new ArrayList<>();
 
-        for(Map.Entry<String, Equipa> entry : equipas.entrySet()) {
-            equipas.put(entry.getKey(), entry.getValue().clone());
-        }
+        equipas.replaceAll((k, v) -> v.clone());
 
-        for(Jogo jogo: jogos) {
-            jogos.add(jogo);
-        }
+        jogos.addAll(jogos);
     }
 
     /***
@@ -73,13 +70,7 @@ public class FootballManagerModel {
 
     /* TODO: encapsular com clone */
     public List<Jogo> getJogos() {
-        List<Jogo> jogos = new ArrayList<>();
-
-        for(Jogo jogo: this.jogos) {
-            jogos.add(jogo);
-        }
-
-        return jogos;
+        return this.jogos.stream().map(x -> x.clone()).collect(Collectors.toList());
     }
 
     /* TODO: encapsular com clone*/

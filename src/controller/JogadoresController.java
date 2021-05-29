@@ -11,8 +11,8 @@ public class JogadoresController extends Menu {
 
     @Override
     public void executa(FootballManagerModel model) {
-        Scanner is = new Scanner(System.in);
         int numeroJ, vel, res, des, imp, cab, rem, p;
+        Scanner is = new Scanner(System.in);
         JogadoresView view = new JogadoresView();
         EquipaView equipaView = new EquipaView();
 

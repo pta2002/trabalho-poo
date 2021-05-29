@@ -31,7 +31,7 @@ public class EquipaController extends Menu {
             StringBuilder equipa = new StringBuilder();
             equipa.append(is.nextLine());
 
-            while (model.existeEquipa(equipa.toString()) == false) {
+            while (!model.existeEquipa(equipa.toString())) {
                 view.errosEquipa(1);
                 equipa.delete(0,equipa.length());
                 equipa.append(is.nextLine());
@@ -62,7 +62,7 @@ public class EquipaController extends Menu {
         StringBuilder equipa = new StringBuilder();
         equipa.append(is.nextLine());
 
-        while (model.existeEquipa(equipa.toString()) == true) {
+        while (model.existeEquipa(equipa.toString())) {
             view.errosEquipa(2);
             equipa.delete(0,equipa.length());
             equipa.append(is.nextLine());
