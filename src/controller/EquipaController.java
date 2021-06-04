@@ -26,8 +26,8 @@ public class EquipaController extends Menu {
         Scanner is = new Scanner(System.in);
         EquipaView view = new EquipaView();
         do {
-            view.border(1);
-            view.mensagens(1);
+        view.border(1);
+        view.mensagens(1);
             StringBuilder equipa = new StringBuilder();
             equipa.append(is.nextLine());
 

@@ -35,6 +35,10 @@ public class FootballManagerController extends Menu {
                         equipaController.executa(model);
                         break;
                     case 5:
+                         ListaEquipasController c = new ListaEquipasController();
+                         c.executa(model);
+                         break;
+                    case 6:
                         JogoController jogoController = new JogoController();
                         jogoController.executa(model);
                         break;

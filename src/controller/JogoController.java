@@ -1,12 +1,18 @@
 package controller;
 
+import model.Equipa.Equipa;
 import model.Exceptions.Equipa.EquipaNaoExisteException;
 import model.Exceptions.Equipa.EquipasIguaisException;
 import model.FootballManagerModel;
 import model.Jogo.Jogo;
+import model.Jogo.ModeloTatico;
 import view.JogoView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class JogoController extends  Menu{
 
@@ -16,31 +22,50 @@ public class JogoController extends  Menu{
         Jogo jogo = new Jogo();
         handleEquipa(jogo,model,view,1);
         handleEquipa(jogo,model,view,2);
-        System.out.println(jogo.getEquipaCasa());
-        System.out.println(jogo.getEquipaFora());
-
-
+        modeloTaticoCasa(jogo, view);
+        modeloTaticoVisitante(jogo, view );
+        // perguntar se quer troca do jogador
     }
-    private void handleSetup(Jogo jogo, FootballManagerModel model, JogoView view, int opcao ) {
-        //try {
-        //
-        //}
-        //catch(k)
+    private void modeloTaticoVisitante(Jogo jogo, JogoView view) {
+        escolheModeloTatico(jogo,view,4);
+    }
+    private void modeloTaticoCasa(Jogo jogo, JogoView view) {
+        escolheModeloTatico(jogo,view,3);
+    }
+    private void escolheModeloTatico(Jogo jogo, JogoView view, int op) {
+        view.mensagens(op);
+        ArrayList<String> l = new ArrayList<>();
+        for (ModeloTatico c : ModeloTatico.values()) {
+            l.add(c.getModeloTatico());
+        }
+        int querMudarModelo = Menu.showMenuReadOption(new ArrayList<>(Arrays.asList("Sim", "Não")));
+        if (querMudarModelo == 1) {
+            int op2 = Menu.showMenuReadOption(l);
+            Consumer<ModeloTatico> fun = op == 3 ? jogo::setModeloTaticoCasa : jogo::setModeloTaticoFora;
+
+            switch (op2) {
+                case 1:
+                    fun.accept(ModeloTatico.QUATRO_QUATRO_DOIS);
+                    break;
+                case 2:
+                    fun.accept(ModeloTatico.QUATRO_TRES_TRES);
+                    break;
+                case 3:
+                    fun.accept(ModeloTatico.TRES_CINCO_DOIS);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
     private void handleEquipa(Jogo jogo, FootballManagerModel model, JogoView view, int opcao ) {
-        //var cenas = (opcao == 1) ? x -> jogo.setEquipaCasa(x) : x -> jogo.setEquipaFora(x);
-
         try{
-            if(opcao == 1) {
-                jogo.setEquipaCasa(escolhaEquipa(model,view,opcao,jogo));
-            }
-            else {
-                jogo.setEquipaFora(escolhaEquipa(model,view,opcao,jogo));
-            }
+            Consumer<Equipa> fun = opcao == 1 ? jogo::setEquipaCasa : jogo::setEquipaFora;
+                fun.accept(model.getEquipa(escolhaEquipa(model,view,opcao,jogo)));
         }
         catch (Exception e) {
-            if (e instanceof EquipasIguaisException) view.erros(1);
+            if (e instanceof EquipaNaoExisteException) view.erros(1);
             if (e instanceof EquipasIguaisException) view.erros(2);
             handleEquipa(jogo,model,view,opcao);
         }

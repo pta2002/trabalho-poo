@@ -68,16 +68,12 @@ public class FootballManagerModel {
         this.equipas = copiaEquipas;
     }
 
-    /* TODO: encapsular com clone */
     public List<Jogo> getJogos() {
-        return this.jogos.stream().map(x -> x.clone()).collect(Collectors.toList());
+        return this.jogos.stream().map(Jogo::clone).collect(Collectors.toList());
     }
-
-    /* TODO: encapsular com clone*/
     public void setJogos(List<Jogo> jogos) {
-        this.jogos = jogos;
+        this.jogos = jogos.stream().map(Jogo::clone).collect(Collectors.toList());
     }
-
     /* ---------------------------------------------------------- Retorna a equipa indicada pela key*/
     public Equipa getEquipa(String equipa) {
          return this.equipas.get(equipa);

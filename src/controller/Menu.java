@@ -23,6 +23,31 @@ public abstract class Menu {
         }
         System.out.println("0 - Sair");
     }
+    static int showMenuReadOption(List<String> opcoes) {
+        System.out.println("\n +------------| Football Manager Menu |-----------+ \n");
+        for (int i=0; i<opcoes.size(); i++) {
+            System.out.print(i+1);
+            System.out.print(" - ");
+            System.out.println(opcoes.get(i));
+        }
+        System.out.println("0 - Sair");
+        int op;
+        Scanner is = new Scanner(System.in);
+
+        System.out.print("\nOpção: ");
+        try {
+            op = is.nextInt();
+        }
+        catch (InputMismatchException e) {
+            op = -1;
+        }
+        if (op<0 || op>opcoes.size()) {
+            System.out.println("Opção inválida!!!");
+            op = -1;
+        }
+
+        return op;
+    }
 
     protected int lerOpcao() {
         int op;

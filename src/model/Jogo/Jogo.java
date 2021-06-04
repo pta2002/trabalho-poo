@@ -20,7 +20,11 @@ public class Jogo {
     Map<Integer, Integer> substituicoesCasa;
     Map<Integer, Integer> substitucoesFora ;
 
-    public Jogo() { }
+    public Jogo() {
+        date = LocalDate.now();
+        substituicoesCasa = new HashMap<>();
+        substitucoesFora = new HashMap<>();
+    }
     // Jogo novo
     public Jogo(Equipa ec, Equipa ef){
         equipaCasa = ec.getNome();
@@ -76,12 +80,20 @@ public class Jogo {
         return equipaCasa;
     }
 
+    public void setEquipaCasa(Equipa equipaCasa) {
+        this.equipaCasa = equipaCasa.getNome();
+        this.setupEquipaCasa = new SetupEquipa(equipaCasa);
+    }
     public void setEquipaCasa(String equipaCasa) {
         this.equipaCasa = equipaCasa;
     }
 
     public String getEquipaFora() {
         return equipaFora;
+    }
+    public void setEquipaFora(Equipa equipaFora) {
+        this.equipaFora = equipaFora.getNome();
+        this.setupEquipaFora = new SetupEquipa(equipaFora);
     }
 
     public void setEquipaFora(String equipaFora) {
@@ -164,6 +176,14 @@ public class Jogo {
         return  "Jogo:" + equipaCasa + " - " + equipaFora;
         //+ " -> " + substituicoesCasa.toString()
         //+ " -> " + substitucoesFora.toString();
+    }
+
+    public void setModeloTaticoCasa(ModeloTatico mt) {
+        if (setupEquipaCasa == null) System.out.println("tone");
+        this.setupEquipaCasa.setModeloTatico(mt);
+    }
+    public void setModeloTaticoFora(ModeloTatico mt) {
+        this.setupEquipaFora.setModeloTatico(mt);
     }
 }
 

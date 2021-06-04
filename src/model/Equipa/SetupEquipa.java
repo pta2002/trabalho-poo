@@ -21,6 +21,8 @@ public class SetupEquipa {
         List<Integer> list = equipa.getJogadores().stream().map(Jogador::getNumeroJogador).collect(Collectors.toList());
         Collections.shuffle(list);
         this.titulares = list.subList(0,11);
+        list.removeAll(this.titulares);
+        this.noBanco =  list.subList(0,4);
         this.emCampo = this.titulares;
     }
     public SetupEquipa(SetupEquipa setup) {
