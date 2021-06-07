@@ -1,4 +1,4 @@
-package model.Simulacao.Evento;
+package model.Jogo.Evento;
 
 import model.Equipa.Equipa;
 import model.Jogador.Jogador;

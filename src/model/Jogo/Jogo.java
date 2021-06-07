@@ -2,12 +2,11 @@ package model.Jogo;
 
 import model.Equipa.Equipa;
 import model.Equipa.SetupEquipa;
+import model.Jogo.Evento.EventoJogo;
+import model.Jogo.Evento.PosseBola;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Jogo {
     private String equipaCasa;
@@ -18,14 +17,24 @@ public class Jogo {
     private SetupEquipa setupEquipaCasa;
     private SetupEquipa setupEquipaFora;
     Map<Integer, Integer> substituicoesCasa;
-    Map<Integer, Integer> substitucoesFora ;
+    Map<Integer, Integer> substitucoesFora;
+    private Random random;
+    private EventoJogo ultimoEvento;
 
+    /***
+     * Cria um jogo vazio
+     */
     public Jogo() {
         date = LocalDate.now();
         substituicoesCasa = new HashMap<>();
         substitucoesFora = new HashMap<>();
     }
-    // Jogo novo
+
+    /***
+     * Cria um jogo novo, a decorrer neste momento, entre duas equipas, com um setup aleatório
+     * @param ec a equipa de casa
+     * @param ef a equipa de fora
+     */
     public Jogo(Equipa ec, Equipa ef){
         equipaCasa = ec.getNome();
         equipaFora = ef.getNome();
@@ -35,7 +44,19 @@ public class Jogo {
         substituicoesCasa = new HashMap<>();
         substitucoesFora = new HashMap<>();
     }
-    //  Jogo no passado
+
+    /**
+     * Construtor parameterizado de um jogo
+     * @param ec Equipa de casa
+     * @param ef Equipa de fora
+     * @param gc Golos da casa
+     * @param gf Golos de fora
+     * @param d Data do jogo
+     * @param jc Jogadores da equipa de casa
+     * @param sc Setup da equipa de casa
+     * @param jf Jogadores da equipa de fora
+     * @param sf Setup da equipa de fora
+     */
     public Jogo(String ec, String ef, int gc, int gf, LocalDate d, List<Integer> jc, Map<Integer, Integer> sc, List<Integer> jf, Map<Integer, Integer> sf){
         equipaCasa = ec;
         equipaFora = ef;
@@ -48,6 +69,10 @@ public class Jogo {
         substitucoesFora = new HashMap<>(sf);
     }
 
+    /**
+     * Construtor de cópia de um jogo
+     * @param jogo Jogo a copiar
+     */
     public Jogo(Jogo jogo) {
         this.equipaCasa = jogo.getEquipaCasa();
         this.equipaFora = jogo.getEquipaFora();
@@ -58,7 +83,8 @@ public class Jogo {
         this.setupEquipaFora = jogo.getSetupEquipaFora();
         this.substituicoesCasa = jogo.getSubstituicoesCasa();
         this.substitucoesFora = jogo.getSubstitucoesFora();
-
+        this.ultimoEvento = jogo.getUltimoEvento();
+        this.random = jogo.random;
     }
     public SetupEquipa getSetupEquipaCasa() {
         return setupEquipaCasa.clone();
@@ -124,7 +150,6 @@ public class Jogo {
         this.date = date;
     }
 
-
     public Map<Integer, Integer> getSubstituicoesCasa() {
         return substituicoesCasa;
     }
@@ -141,6 +166,13 @@ public class Jogo {
         this.substitucoesFora = substitucoesFora;
     }
 
+    public EventoJogo getUltimoEvento() {
+        return ultimoEvento;
+    }
+
+    public void setUltimoEvento(EventoJogo ultimoEvento) {
+        this.ultimoEvento = ultimoEvento;
+    }
 
     public static Jogo parse(String input){
         String[] campos = input.split(",");
@@ -169,7 +201,6 @@ public class Jogo {
     }
     public Jogo clone() {
         return new Jogo(this);
-
     }
 
     public String toString() {
@@ -182,8 +213,33 @@ public class Jogo {
         if (setupEquipaCasa == null) System.out.println("tone");
         this.setupEquipaCasa.setModeloTatico(mt);
     }
+
     public void setModeloTaticoFora(ModeloTatico mt) {
         this.setupEquipaFora.setModeloTatico(mt);
+    }
+
+
+    /***
+     * Avança a simulação até ao próximo evento
+     * @return O próximo evento a ocorrer. Se for null, o jogo acabou.
+     */
+    public EventoJogo avancaSimulacao() {
+        if (ultimoEvento == null) {
+            // Se o último evento for nulo, significa que o jogo vai começar, portanto determinamos a equipa que começa
+            // com uma "moeda ao ar", ou seja, 50/50 para quem tem posse de bola.
+            String inicial;
+            if (random.nextBoolean()) {
+                inicial = equipaCasa;
+            } else {
+                inicial = equipaFora;
+            }
+
+            ultimoEvento = new PosseBola(0.0, inicial);
+        } else {
+
+        }
+
+        return ultimoEvento;
     }
 }
 

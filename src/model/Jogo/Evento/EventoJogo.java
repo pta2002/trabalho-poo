@@ -1,4 +1,4 @@
-package model.Simulacao.Evento;
+package model.Jogo.Evento;
 
 /***
  * Representa um evento que ocorreu no jogo, a um determinado tempo
