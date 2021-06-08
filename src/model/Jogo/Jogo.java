@@ -20,6 +20,7 @@ public class Jogo {
     Map<Integer, Integer> substitucoesFora;
     private Random random;
     private EventoJogo ultimoEvento;
+    private double tempoComBola;
 
     /***
      * Cria um jogo vazio
@@ -84,8 +85,10 @@ public class Jogo {
         this.substituicoesCasa = jogo.getSubstituicoesCasa();
         this.substitucoesFora = jogo.getSubstitucoesFora();
         this.ultimoEvento = jogo.getUltimoEvento();
+        this.tempoComBola = jogo.getTempoComBola();
         this.random = jogo.random;
     }
+
     public SetupEquipa getSetupEquipaCasa() {
         return setupEquipaCasa.clone();
     }
@@ -218,7 +221,6 @@ public class Jogo {
         this.setupEquipaFora.setModeloTatico(mt);
     }
 
-
     /***
      * Avança a simulação até ao próximo evento
      * @return O próximo evento a ocorrer. Se for null, o jogo acabou.
@@ -240,6 +242,10 @@ public class Jogo {
         }
 
         return ultimoEvento;
+    }
+
+    private double getTempoComBola() {
+        return tempoComBola;
     }
 }
 
