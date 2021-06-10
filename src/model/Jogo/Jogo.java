@@ -266,6 +266,16 @@ public class Jogo {
     }
 
     /**
+     * Aumenta a quantidade de golos da equipa atual
+     */
+    private void aumentarGolosAtual() {
+        if (equipaEmPosse.equals(equipaCasa))
+            golosCasa++;
+        else
+            golosFora++;
+    }
+
+    /**
      * Tenta passar a bola para um jogador da mesma equipa
      * @param model O modelo
      * @param jogador O jogador a quem passar a bola
@@ -308,6 +318,7 @@ public class Jogo {
 
         if (random.nextDouble() < probabilidadeConseguirMarcar && random.nextDouble() > probabilidadeDefender) {
             // Conseguimos marcar!
+            aumentarGolosAtual();
             tempoComBola = 0;
             return new Golo(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, getEquipaSemPosse());
         } else {
@@ -336,13 +347,16 @@ public class Jogo {
                 jogadorEmPosse = setupEquipaFora.getAvancados().get(0);
             }
 
-            // TODO: Temos de determinar qual o jogador da equipa que é mais provável começar com a bola... avançados? help eu não sei nada de futebol
             ultimoEvento = new PosseBola(0.0, equipaEmPosse, jogadorEmPosse);
+        } else if (ultimoEvento.getClass() == Golo.class) {
+            equipaEmPosse = getEquipaSemPosse();
+            jogadorEmPosse = getSetupComBola().getAvancados().get(0);
+
+            ultimoEvento = new PosseBola(ultimoEvento.getTempo(), equipaEmPosse, jogadorEmPosse);
         } else {
             double tempoPassado = random.nextDouble() * 2 + 5; // Entre 3 e 7s
             // Se a mesma equipa esteve 45 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
             Equipa equipaAtual = model.getEquipa(equipaEmPosse);
-            Jogador jogadorAtual = equipaAtual.getJogador(jogadorEmPosse);
             if (tempoComBola + tempoPassado > 45) {
                 if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
                     List<Integer> avancados = getSetupComBola().getAvancados();
@@ -351,6 +365,12 @@ public class Jogo {
                 } else {
                     ultimoEvento = tentaMarcar(model, tempoPassado);
                 }
+            } else {
+                List<Integer> jogadoresAPassar = getSetupComBola().getAvancados();
+                jogadoresAPassar.addAll(getSetupComBola().getMedios());
+                int jogador = jogadoresAPassar.get(random.nextInt(jogadoresAPassar.size()));
+
+                ultimoEvento = tentaPassarBola(model, tempoPassado, jogador);
             }
         }
 
