@@ -82,13 +82,13 @@ public class Avancado extends Jogador {
 
         switch (posicao) {
             case GUARDA_REDES:
-                adequacao = ((impulsao + destreza) / 2 * 100) * avancadoParaGuardaRedesConst;
+                adequacao = ((impulsao + destreza) / (2 * 100)) * avancadoParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = ((cabeca + impulsao + passe) / 3 * 100) * avancadoParaDefesaConst;
+                adequacao = ((cabeca + impulsao + passe) / (3 * 100)) * avancadoParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = ((passe + velocidade + resistencia + destreza) / 4 * 100) * avancadoParaMedioConst;
+                adequacao = ((passe + velocidade + resistencia + destreza) / (4 * 100)) * avancadoParaMedioConst;
                 break;
             case AVANCADO:
                 adequacao = avancadoParaAvancadoConst;

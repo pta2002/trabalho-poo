@@ -97,16 +97,16 @@ public class Lateral extends Jogador {
 
         switch (posicao){
             case GUARDA_REDES:
-                adequacao = ((impulsao + destreza)/2*100)*lateralParaGuardaRedesConst;
+                adequacao = ((impulsao + destreza)/(2*100))*lateralParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = ((cabeca + impulsao + passe)/3*100)*lateralParaDefesaConst;
+                adequacao = ((cabeca + impulsao + passe)/(3*100))*lateralParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = ((passe + velocidade + resistencia + destreza)/4*100)*lateralParaMedioConst;
+                adequacao = ((passe + velocidade + resistencia + destreza)/(4*100))*lateralParaMedioConst;
                 break;
             case AVANCADO:
-                adequacao = ((velocidade + impulsao + remate + cabeca + destreza)/5*100)*lateralParaAvancadoConst;
+                adequacao = ((velocidade + impulsao + remate + cabeca + destreza)/(5*100))*lateralParaAvancadoConst;
                 break;
         }
         return adequacao;
