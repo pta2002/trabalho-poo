@@ -35,23 +35,24 @@ public class JogoController extends  Menu{
     private void escolheModeloTatico(Jogo jogo, JogoView view, int op) {
         view.mensagens(op);
         ArrayList<String> l = new ArrayList<>();
-        for (ModeloTatico c : ModeloTatico.values()) {
-            l.add(c.getModeloTatico());
+        for (ModeloTatico c : ModeloTatico.getModelos()) {
+            l.add(c.toString());
         }
         int querMudarModelo = Menu.showMenuReadOption(new ArrayList<>(Arrays.asList("Sim", "Não")));
         if (querMudarModelo == 1) {
             int op2 = Menu.showMenuReadOption(l);
             Consumer<ModeloTatico> fun = op == 3 ? jogo::setModeloTaticoCasa : jogo::setModeloTaticoFora;
 
+            // TODO: Melhorar isto, para suportar qualquer tipo de modelo
             switch (op2) {
                 case 1:
-                    fun.accept(ModeloTatico.QUATRO_QUATRO_DOIS);
+                    fun.accept(new ModeloTatico(4,4,2));
                     break;
                 case 2:
-                    fun.accept(ModeloTatico.QUATRO_TRES_TRES);
+                    fun.accept(new ModeloTatico(4,3,3));
                     break;
                 case 3:
-                    fun.accept(ModeloTatico.TRES_CINCO_DOIS);
+                    fun.accept(new ModeloTatico(3,5,2));
                     break;
                 default:
                     break;

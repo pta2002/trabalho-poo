@@ -2,6 +2,7 @@ package model.Jogo;
 
 import model.Equipa.Equipa;
 import model.Equipa.SetupEquipa;
+import model.FootballManagerModel;
 import model.Jogo.Evento.EventoJogo;
 import model.Jogo.Evento.PosseBola;
 
@@ -221,31 +222,45 @@ public class Jogo {
         this.setupEquipaFora.setModeloTatico(mt);
     }
 
+    private double getTempoComBola() {
+        return tempoComBola;
+    }
+
+    private void setTempoComBola(double tempoComBola) {
+        this.tempoComBola = tempoComBola;
+    }
+
     /***
      * Avança a simulação até ao próximo evento
+     * @param model O modelo a utilizar para avançar a simulação
      * @return O próximo evento a ocorrer. Se for null, o jogo acabou.
      */
-    public EventoJogo avancaSimulacao() {
+    public EventoJogo avancaSimulacao(FootballManagerModel model) {
         if (ultimoEvento == null) {
             // Se o último evento for nulo, significa que o jogo vai começar, portanto determinamos a equipa que começa
             // com uma "moeda ao ar", ou seja, 50/50 para quem tem posse de bola.
             String inicial;
+            int jogador;
             if (random.nextBoolean()) {
                 inicial = equipaCasa;
+                jogador = setupEquipaCasa.getEmCampo().get(0);
             } else {
                 inicial = equipaFora;
+                jogador = setupEquipaFora.getEmCampo().get(0);
             }
 
-            ultimoEvento = new PosseBola(0.0, inicial);
+            // TODO: Temos de determinar qual o jogador da equipa que é mais provável começar com a bola... avançados? help eu não sei nada de futebol
+            ultimoEvento = new PosseBola(0.0, inicial, jogador);
         } else {
-
+            double tempoPassado = random.nextDouble() * 2 + 5; // Entre 3 e 7s
+            // Se a mesma equipa esteve 45 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
+            if (tempoComBola + tempoPassado > 45) {
+                // TODO: Se calhar aqui, o melhor, é tentar passar para um avançado primeiro!
+                
+            }
         }
 
         return ultimoEvento;
-    }
-
-    private double getTempoComBola() {
-        return tempoComBola;
     }
 }
 

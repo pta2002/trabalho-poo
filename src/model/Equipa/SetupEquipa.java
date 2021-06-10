@@ -25,25 +25,27 @@ public class SetupEquipa {
         this.noBanco =  list.subList(0,4);
         this.emCampo = this.titulares;
     }
+
     public SetupEquipa(SetupEquipa setup) {
         this.titulares = setup.getTitulares();
         this.modeloTatico = setup.getModeloTatico();
         this.equipa = setup.getEquipa();
         this.emCampo = setup.getEmCampo();
         this.noBanco = setup.getNoBanco();
-
     }
+
     public SetupEquipa(Equipa equipa, ModeloTatico modeloTatico, ArrayList<Integer> titulares, ArrayList<Integer> noBanco) {
         this.equipa = equipa.clone();
         this.modeloTatico = modeloTatico;
-        this.titulares = new ArrayList<Integer>(titulares);
-        this.emCampo = new ArrayList<Integer>(titulares);
-        this.noBanco = new ArrayList<Integer>(noBanco);
+        this.titulares = new ArrayList<>(titulares);
+        this.emCampo = new ArrayList<>(titulares);
+        this.noBanco = new ArrayList<>(noBanco);
     }
+
     public SetupEquipa(List<Integer> titulares) {
         this.titulares = new ArrayList<>(titulares);
-        this.emCampo = new ArrayList<Integer>();
-        this.noBanco = new ArrayList<Integer>();
+        this.emCampo = new ArrayList<>();
+        this.noBanco = new ArrayList<>();
     }
 
     public List<Integer> getTitulares() {
@@ -84,6 +86,7 @@ public class SetupEquipa {
     public void setEquipa(Equipa equipa) {
         this.equipa = equipa.clone();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,5 +101,46 @@ public class SetupEquipa {
     }
     public SetupEquipa clone() {
         return new SetupEquipa(this);
+    }
+
+    public Integer getGuardaRedes() {
+        // Não vale a pena complicar, só existe um guarda redes e é sempre o primeiro
+        return this.emCampo.get(0);
+    }
+
+    public List<Integer> getDefesas() {
+        int nDefesas = modeloTatico.getNumDefesas();
+        List<Integer> defesas = new ArrayList<>(nDefesas);
+
+        for (int i = 1; i < nDefesas + 1; i++) {
+            defesas.add(emCampo.get(i));
+        }
+
+        return defesas;
+    }
+
+    public List<Integer> getMedios() {
+        int nMedios = modeloTatico.getNumMedios();
+        int nDefesas = modeloTatico.getNumDefesas();
+        List<Integer> medios = new ArrayList<>(nMedios);
+
+        for (int i = 1 + nDefesas; i < nMedios + 1 + nDefesas; i++) {
+            medios.add(emCampo.get(i));
+        }
+
+        return medios;
+    }
+
+    public List<Integer> getAvancados() {
+        int nMedios = modeloTatico.getNumMedios();
+        int nDefesas = modeloTatico.getNumDefesas();
+        int nAvancados = modeloTatico.getNumAvancados();
+        List<Integer> avancados = new ArrayList<>(nAvancados);
+
+        for (int i = 1 + nDefesas + nMedios; i < nAvancados + 1 + nDefesas + nMedios; i++) {
+            avancados.add(emCampo.get(i));
+        }
+
+        return avancados;
     }
 }
