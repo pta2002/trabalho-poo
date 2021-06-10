@@ -81,10 +81,7 @@ public class GuardaRedes extends Jogador {
         double soma = this.getRemate() + this.getVelocidade() + this.getCabeca()  + this.getElasticidade()*4 +
                 this.getDestreza()*3 + this.getPasse() + this.getImpulsao()*4 + this.getResistencia();
 
-        double habilidade = soma / this.getResistencia() + this.getDestreza() + this.getImpulsao() + this.getPasse() +
-                this.getVelocidade() + this.getCabeca() + this.getRemate() + this.getElasticidade();
-
-        return habilidade;
+        return soma / 16;
     }
 
     public double getAdequacao(PosicaoJogador posicao) {

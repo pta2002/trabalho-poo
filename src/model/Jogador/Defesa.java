@@ -67,10 +67,7 @@ public class Defesa extends Jogador {
         double soma = this.getRemate() + this.getVelocidade() + this.getCabeca()*3 +
                 this.getDestreza() + this.getPasse()*2 + this.getImpulsao()*3 + this.getResistencia()*2;
 
-        double habilidade = soma / this.getResistencia() + this.getDestreza() + this.getImpulsao() + this.getPasse() +
-                this.getVelocidade() + this.getCabeca() + this.getRemate();
-
-        return habilidade;
+        return soma / 13;
     }
 
     public double getAdequacao(PosicaoJogador posicao) {

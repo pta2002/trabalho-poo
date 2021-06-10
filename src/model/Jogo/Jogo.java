@@ -291,9 +291,8 @@ public class Jogo {
         int nDefesaAdversario = defesasAdversarios.get(random.nextInt(defesasAdversarios.size()));
         Jogador jogadorDefesa = model.getEquipa(getEquipaSemPosse()).getJogador(nDefesaAdversario);
 
-        // Dividimos por 200, para que nunca seja mais do que 50%
-//        double probabilidadeDefender = jogadorDefesa.getHabilidade() / 200;
-        double probabilidadeDefender = 0.2;
+        // Dividimos por 1000, para que nunca seja mais do que 10%
+        double probabilidadeDefender = jogadorDefesa.getHabilidade() / 1000;
 
         if (random.nextDouble() < probabilidadeConseguirPassar && random.nextDouble() > probabilidadeDefender) {
             PassagemBola p = new PassagemBola(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, equipaEmPosse, jogador);
@@ -359,9 +358,9 @@ public class Jogo {
             ultimoEvento = new PosseBola(ultimoEvento.getTempo(), equipaEmPosse, jogadorEmPosse);
         } else {
             double tempoPassado = random.nextDouble() * 2 + 5; // Entre 3 e 7s
-            // Se a mesma equipa esteve 45 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
+            // Se a mesma equipa esteve 30 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
             Equipa equipaAtual = model.getEquipa(equipaEmPosse);
-            if (tempoComBola + tempoPassado > 45) {
+            if (tempoComBola + tempoPassado > 30) {
                 if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
                     List<Integer> avancados = getSetupComBola().getAvancados();
                     int avancado = avancados.get(random.nextInt(avancados.size()));

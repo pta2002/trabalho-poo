@@ -81,10 +81,7 @@ public class Lateral extends Jogador {
         double soma = this.getRemate() + this.getVelocidade()*3 + this.getCabeca() + this.getCruzamento()*3 +
                 this.getDestreza()*2 + this.getPasse()*2 + this.getImpulsao() + this.getResistencia()*4;
 
-        double habilidade = soma / this.getResistencia() + this.getDestreza() + this.getImpulsao() + this.getPasse() +
-                this.getVelocidade() + this.getCabeca() + this.getRemate() + this.getCruzamento();
-
-        return habilidade;
+        return soma / 17;
     }
 
     @Override

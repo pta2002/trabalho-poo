@@ -65,11 +65,9 @@ public class Avancado extends Jogador {
     @Override
     public double getHabilidade() {
         double soma = this.getRemate()*4 + this.getVelocidade()*3 + this.getCabeca()*3 +
-                     this.getDestreza()*2 + this.getPasse() + this.getImpulsao()*2 + this.getResistencia()*1;
+                     this.getDestreza()*2 + this.getPasse() + this.getImpulsao()*2 + this.getResistencia();
 
-        double habilidade = soma / this.getResistencia() + this.getDestreza() + this.getImpulsao() + this.getPasse() +
-                                this.getVelocidade() + this.getCabeca() + this.getRemate();
-        return habilidade;
+        return soma / 14;
     }
 
     @Override

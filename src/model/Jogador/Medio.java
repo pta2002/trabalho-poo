@@ -81,12 +81,9 @@ public class Medio extends Jogador {
     @Override
     public double getHabilidade() {
         double soma = this.getRemate()*2 + this.getVelocidade()*2 + this.getCabeca()* + this.getRecuperacao()*2 +
-                this.getDestreza()*2 + this.getPasse()*4 + this.getImpulsao() + this.getResistencia()*1;
+                this.getDestreza()*2 + this.getPasse()*4 + this.getImpulsao() + this.getResistencia();
 
-        double habilidade = soma / this.getResistencia() + this.getDestreza() + this.getImpulsao() + this.getPasse() +
-                this.getVelocidade() + this.getCabeca() + this.getRemate() + this.getRecuperacao();
-
-        return habilidade;
+        return soma / 15;
     }
 
     public double getAdequacao(PosicaoJogador posicao) {
