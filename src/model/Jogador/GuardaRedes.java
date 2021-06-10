@@ -1,5 +1,7 @@
 package model.Jogador;
 
+import model.Jogo.PosicaoJogador;
+
 public class GuardaRedes extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     private int elasticidade;
@@ -83,5 +85,29 @@ public class GuardaRedes extends Jogador {
                 this.getVelocidade() + this.getCabeca() + this.getRemate() + this.getElasticidade();
 
         return habilidade;
+    }
+
+    public double getAdequacao(PosicaoJogador posicao) {
+        double redesParaDefesaConst = 0.4;
+        double redesParaMedioConst = 0.3;
+        double redesParaGuardaRedesConst = 1;
+        double redesParaAvancadoConst = 0.1;
+        double adequacao = 0;
+
+        switch (posicao) {
+            case GUARDA_REDES:
+                adequacao = redesParaGuardaRedesConst;
+                break;
+            case DEFESA:
+                adequacao = ((cabeca + impulsao + passe)/3*100)*redesParaDefesaConst;
+                break;
+            case MEDIO:
+                adequacao = ((passe + velocidade + resistencia + destreza) / 4 * 100) * redesParaMedioConst;
+                break;
+            case AVANCADO:
+                adequacao = ((velocidade + impulsao + remate + cabeca + destreza)/5*100)*redesParaAvancadoConst;
+                break;
+        }
+        return adequacao;
     }
 }

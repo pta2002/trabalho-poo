@@ -1,5 +1,7 @@
 package model.Jogador;
 
+import model.Jogo.PosicaoJogador;
+
 public abstract class Jogador {
 
     /* ----------------------------------------------------------- Atributos */
@@ -81,6 +83,8 @@ public abstract class Jogador {
     }
 
     public abstract double getHabilidade();
+
+    public abstract double getAdequacao(PosicaoJogador posicao);
 
     /* ----------------------------------------------------------- Clone */
     @Override

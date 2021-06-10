@@ -1,5 +1,7 @@
 package model.Jogador;
 
+import model.Jogo.PosicaoJogador;
+
 public class Lateral extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     private int cruzamento;
@@ -83,5 +85,30 @@ public class Lateral extends Jogador {
                 this.getVelocidade() + this.getCabeca() + this.getRemate() + this.getCruzamento();
 
         return habilidade;
+    }
+
+    @Override
+    public double getAdequacao(PosicaoJogador posicao) {
+        double lateralParaDefesaConst = 0.8;
+        double lateralParaMedioConst = 0.6;
+        double lateralParaGuardaRedesConst = 0.1;
+        double lateralParaAvancadoConst = 0.7;
+        double adequacao = 0;
+
+        switch (posicao){
+            case GUARDA_REDES:
+                adequacao = ((impulsao + destreza)/2*100)*lateralParaGuardaRedesConst;
+                break;
+            case DEFESA:
+                adequacao = ((cabeca + impulsao + passe)/3*100)*lateralParaDefesaConst;
+                break;
+            case MEDIO:
+                adequacao = ((passe + velocidade + resistencia + destreza)/4*100)*lateralParaMedioConst;
+                break;
+            case AVANCADO:
+                adequacao = ((velocidade + impulsao + remate + cabeca + destreza)/5*100)*lateralParaAvancadoConst;
+                break;
+        }
+        return adequacao;
     }
 }

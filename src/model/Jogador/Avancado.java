@@ -1,5 +1,7 @@
 package model.Jogador;
 
+import model.Jogo.PosicaoJogador;
+
 public class Avancado extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     /* TODO */
@@ -70,4 +72,28 @@ public class Avancado extends Jogador {
         return habilidade;
     }
 
+    @Override
+    public double getAdequacao(PosicaoJogador posicao) {
+        double avancadoParaDefesaConst = 0.5;
+        double avancadoParaMedioConst = 0.8;
+        double avancadoParaGuardaRedesConst = 0.1;
+        double avancadoParaAvancadoConst = 1;
+        double adequacao = 0;
+
+        switch (posicao) {
+            case GUARDA_REDES:
+                adequacao = ((impulsao + destreza) / 2 * 100) * avancadoParaGuardaRedesConst;
+                break;
+            case DEFESA:
+                adequacao = ((cabeca + impulsao + passe) / 3 * 100) * avancadoParaDefesaConst;
+                break;
+            case MEDIO:
+                adequacao = ((passe + velocidade + resistencia + destreza) / 4 * 100) * avancadoParaMedioConst;
+                break;
+            case AVANCADO:
+                adequacao = avancadoParaAvancadoConst;
+                break;
+        }
+        return adequacao;
+    }
 }

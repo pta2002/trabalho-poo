@@ -1,5 +1,7 @@
 package model.Jogador;
 
+import model.Jogo.PosicaoJogador;
+
 public class Medio extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     private int recuperacao;
@@ -85,5 +87,29 @@ public class Medio extends Jogador {
                 this.getVelocidade() + this.getCabeca() + this.getRemate() + this.getRecuperacao();
 
         return habilidade;
+    }
+
+    public double getAdequacao(PosicaoJogador posicao) {
+        double medioParaDefesaConst = 0.6;
+        double medioParaMedioConst = 1;
+        double medioParaGuardaRedesConst = 0.1;
+        double medioParaAvancadoConst = 0.8;
+        double adequacao = 0;
+
+        switch (posicao) {
+            case GUARDA_REDES:
+                adequacao = ((impulsao + destreza) / 2 * 100) * medioParaGuardaRedesConst;
+                break;
+            case DEFESA:
+                adequacao = ((cabeca + impulsao + passe) / 3 * 100) * medioParaDefesaConst;
+                break;
+            case MEDIO:
+                adequacao = medioParaMedioConst;
+                break;
+            case AVANCADO:
+                adequacao = ((velocidade + impulsao + remate + cabeca + destreza) / 5 * 100) * medioParaAvancadoConst;
+                break;
+        }
+        return adequacao;
     }
 }
