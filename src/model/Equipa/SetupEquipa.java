@@ -1,7 +1,9 @@
 
 package model.Equipa;
+import model.Exceptions.Jogo.JogadorForaDeCampoException;
 import model.Jogador.Jogador;
 import model.Jogo.ModeloTatico;
+import model.Jogo.PosicaoJogador;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -142,5 +144,23 @@ public class SetupEquipa {
         }
 
         return avancados;
+    }
+
+    public PosicaoJogador getPosicaoJogador(int jogador) throws JogadorForaDeCampoException {
+        for (int i = 0; i < emCampo.size(); i++) {
+            if (emCampo.get(i) == jogador) {
+                if (i == 0) {
+                    return PosicaoJogador.GUARDA_REDES;
+                } else if (i < 1 + modeloTatico.getNumDefesas()) {
+                    return PosicaoJogador.DEFESA;
+                } else if (i < 1 + modeloTatico.getNumDefesas() + modeloTatico.getNumMedios()) {
+                    return PosicaoJogador.MEDIO;
+                } else {
+                    return PosicaoJogador.AVANCADO;
+                }
+            }
+        }
+
+        throw new JogadorForaDeCampoException();
     }
 }

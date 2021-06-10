@@ -3,6 +3,7 @@ package model.Jogo;
 import model.Equipa.Equipa;
 import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
+import model.Jogador.Jogador;
 import model.Jogo.Evento.EventoJogo;
 import model.Jogo.Evento.PosseBola;
 
@@ -22,6 +23,8 @@ public class Jogo {
     private Random random;
     private EventoJogo ultimoEvento;
     private double tempoComBola;
+    private String equipaEmPosse;
+    private int jogadorEmPosse;
 
     /***
      * Cria um jogo vazio
@@ -239,24 +242,24 @@ public class Jogo {
         if (ultimoEvento == null) {
             // Se o último evento for nulo, significa que o jogo vai começar, portanto determinamos a equipa que começa
             // com uma "moeda ao ar", ou seja, 50/50 para quem tem posse de bola.
-            String inicial;
-            int jogador;
             if (random.nextBoolean()) {
-                inicial = equipaCasa;
-                jogador = setupEquipaCasa.getEmCampo().get(0);
+                equipaEmPosse = equipaCasa;
+                jogadorEmPosse = setupEquipaCasa.getAvancados().get(0);
             } else {
-                inicial = equipaFora;
-                jogador = setupEquipaFora.getEmCampo().get(0);
+                equipaEmPosse = equipaFora;
+                jogadorEmPosse = setupEquipaFora.getAvancados().get(0);
             }
 
             // TODO: Temos de determinar qual o jogador da equipa que é mais provável começar com a bola... avançados? help eu não sei nada de futebol
-            ultimoEvento = new PosseBola(0.0, inicial, jogador);
+            ultimoEvento = new PosseBola(0.0, equipaEmPosse, jogadorEmPosse);
         } else {
             double tempoPassado = random.nextDouble() * 2 + 5; // Entre 3 e 7s
             // Se a mesma equipa esteve 45 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
+            Equipa equipaAtual = model.getEquipa(equipaEmPosse);
+            Jogador jogadorAtual = equipaAtual.getJogador(jogadorEmPosse);
             if (tempoComBola + tempoPassado > 45) {
-                // TODO: Se calhar aqui, o melhor, é tentar passar para um avançado primeiro!
-                
+                // TODO: Se calhar aqui o melhor é tentar passar para um avançado primeiro!
+
             }
         }
 
