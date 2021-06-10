@@ -82,16 +82,16 @@ public class Defesa extends Jogador {
 
         switch (posicao) {
             case GUARDA_REDES:
-                adequacao = ((impulsao + destreza)/(2*100))*defesaParaGuardaRedesConst;
+                adequacao = (((double) impulsao + destreza)/(2*100))*defesaParaGuardaRedesConst;
                 break;
             case DEFESA:
                 adequacao = defesaParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = ((passe + velocidade + resistencia + destreza)/(4*100))*defesaParaMedioConst;
+                adequacao = (((double) passe + velocidade + resistencia + destreza)/(4*100))*defesaParaMedioConst;
                 break;
             case AVANCADO:
-                adequacao = ((velocidade + impulsao + remate + cabeca + destreza)/(5*100))*defesaParaAvancadoConst;
+                adequacao = (((double) velocidade + impulsao + remate + cabeca + destreza)/(5*100))*defesaParaAvancadoConst;
                 break;
         }
 

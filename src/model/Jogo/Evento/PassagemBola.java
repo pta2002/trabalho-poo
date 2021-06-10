@@ -51,4 +51,8 @@ public class PassagemBola extends EventoJogo {
     public void setEquipaDepois(String equipaDepois) {
         this.equipaDepois = equipaDepois;
     }
+
+    public String toString() {
+        return "Passagem: " + equipaAntes + " " + jogadorAntes + " -> " + equipaDepois + " " + jogadorDepois;
+    }
 }

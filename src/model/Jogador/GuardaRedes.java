@@ -99,13 +99,13 @@ public class GuardaRedes extends Jogador {
                 adequacao = redesParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = ((cabeca + impulsao + passe)/(3*100))*redesParaDefesaConst;
+                adequacao = (((double) cabeca + impulsao + passe)/(3*100))*redesParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = ((passe + velocidade + resistencia + destreza) / (4 * 100)) * redesParaMedioConst;
+                adequacao = (((double) passe + velocidade + resistencia + destreza) / (4 * 100)) * redesParaMedioConst;
                 break;
             case AVANCADO:
-                adequacao = ((velocidade + impulsao + remate + cabeca + destreza)/(5*100))*redesParaAvancadoConst;
+                adequacao = (((double) velocidade + impulsao + remate + cabeca + destreza)/(5*100))*redesParaAvancadoConst;
                 break;
         }
         return adequacao;

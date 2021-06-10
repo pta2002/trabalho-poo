@@ -41,4 +41,8 @@ public class Golo extends EventoJogo {
     public void setEquipaSofreu(String equipaSofreu) {
         this.equipaSofreu = equipaSofreu;
     }
+
+    public String toString() {
+        return "Golo marcado por: " + equipaMarcou + " " + jogadorMarcou + " -> " + equipaSofreu;
+    }
 }

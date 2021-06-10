@@ -34,4 +34,8 @@ public class PosseBola extends EventoJogo {
     public void setJogador(int jogador) {
         this.jogador = jogador;
     }
+
+    public String toString() {
+        return "Posse: " + equipa + " " + jogador;
+    }
 }

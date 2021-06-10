@@ -126,7 +126,6 @@ public class SetupEquipa {
         List<Integer> medios = new ArrayList<>(nMedios);
 
         for (int i = 1 + nDefesas; i < nMedios + 1 + nDefesas; i++) {
-            System.out.println(emCampo.get(i));
             medios.add(emCampo.get(i));
         }
 

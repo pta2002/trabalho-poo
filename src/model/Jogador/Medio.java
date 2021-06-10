@@ -98,16 +98,16 @@ public class Medio extends Jogador {
 
         switch (posicao) {
             case GUARDA_REDES:
-                adequacao = ((impulsao + destreza) / (2 * 100)) * medioParaGuardaRedesConst;
+                adequacao = (((double) impulsao + destreza) / (2 * 100)) * medioParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = ((cabeca + impulsao + passe) / (3 * 100)) * medioParaDefesaConst;
+                adequacao = ((double) (cabeca + impulsao + passe) / (3 * 100)) * medioParaDefesaConst;
                 break;
             case MEDIO:
                 adequacao = medioParaMedioConst;
                 break;
             case AVANCADO:
-                adequacao = ((velocidade + impulsao + remate + cabeca + destreza) / (5 * 100)) * medioParaAvancadoConst;
+                adequacao = ((double) (velocidade + impulsao + remate + cabeca + destreza) / (5 * 100)) * medioParaAvancadoConst;
                 break;
         }
         return adequacao;

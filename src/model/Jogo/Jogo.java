@@ -292,7 +292,8 @@ public class Jogo {
         Jogador jogadorDefesa = model.getEquipa(getEquipaSemPosse()).getJogador(nDefesaAdversario);
 
         // Dividimos por 200, para que nunca seja mais do que 50%
-        double probabilidadeDefender = jogadorDefesa.getHabilidade() / 200;
+//        double probabilidadeDefender = jogadorDefesa.getHabilidade() / 200;
+        double probabilidadeDefender = 0.2;
 
         if (random.nextDouble() < probabilidadeConseguirPassar && random.nextDouble() > probabilidadeDefender) {
             PassagemBola p = new PassagemBola(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, equipaEmPosse, jogador);
