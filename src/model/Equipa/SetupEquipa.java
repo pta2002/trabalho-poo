@@ -21,10 +21,10 @@ public class SetupEquipa {
         Random rand = new Random();
         List<Integer> list = equipa.getJogadores().stream().map(Jogador::getNumeroJogador).collect(Collectors.toList());
         Collections.shuffle(list);
-        this.titulares = list.subList(0,11);
+        this.titulares = new ArrayList<>(list.subList(0,11));
         list.removeAll(this.titulares);
-        this.noBanco =  list.subList(0,4);
-        this.emCampo = this.titulares;
+        this.noBanco =  new ArrayList<>(list.subList(0,4));
+        this.emCampo = new ArrayList<>(this.titulares);
     }
 
     public SetupEquipa(SetupEquipa setup) {
@@ -45,7 +45,7 @@ public class SetupEquipa {
 
     public SetupEquipa(List<Integer> titulares) {
         this.titulares = new ArrayList<>(titulares);
-        this.emCampo = new ArrayList<>();
+        this.emCampo = new ArrayList<>(titulares);
         this.noBanco = new ArrayList<>();
     }
 
@@ -126,6 +126,7 @@ public class SetupEquipa {
         List<Integer> medios = new ArrayList<>(nMedios);
 
         for (int i = 1 + nDefesas; i < nMedios + 1 + nDefesas; i++) {
+            System.out.println(emCampo.get(i));
             medios.add(emCampo.get(i));
         }
 

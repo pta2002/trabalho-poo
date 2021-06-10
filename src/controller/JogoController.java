@@ -4,6 +4,7 @@ import model.Equipa.Equipa;
 import model.Exceptions.Equipa.EquipaNaoExisteException;
 import model.Exceptions.Equipa.EquipasIguaisException;
 import model.FootballManagerModel;
+import model.Jogo.Evento.EventoJogo;
 import model.Jogo.Jogo;
 import model.Jogo.ModeloTatico;
 import view.JogoView;
@@ -23,8 +24,16 @@ public class JogoController extends  Menu{
         handleEquipa(jogo,model,view,1);
         handleEquipa(jogo,model,view,2);
         modeloTaticoCasa(jogo, view);
-        modeloTaticoVisitante(jogo, view );
+        modeloTaticoVisitante(jogo, view);
         // perguntar se quer troca do jogador
+
+        EventoJogo ultimo;
+
+        while ((ultimo = jogo.avancaSimulacao(model)) != null && ultimo.getTempo() < 90 * 60) {
+            System.out.println(ultimo.toString());
+        }
+
+        System.out.println("Final: " + jogo.getGolosCasa() + " - " + jogo.getGolosFora());
     }
     private void modeloTaticoVisitante(Jogo jogo, JogoView view) {
         escolheModeloTatico(jogo,view,4);
