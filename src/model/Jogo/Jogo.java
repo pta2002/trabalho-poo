@@ -5,6 +5,8 @@ import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
 import model.Jogador.Jogador;
 import model.Jogo.Evento.EventoJogo;
+import model.Jogo.Evento.Golo;
+import model.Jogo.Evento.PassagemBola;
 import model.Jogo.Evento.PosseBola;
 
 import java.time.LocalDate;
@@ -233,6 +235,90 @@ public class Jogo {
         this.tempoComBola = tempoComBola;
     }
 
+    /**
+     * Função privada que simplesmente devolve o setup da equipa com posse da bola
+     * @return o SetupEquipa da equipa que tem a bola
+     */
+    private SetupEquipa getSetupComBola() {
+        if (equipaEmPosse.equals(equipaCasa))
+            return setupEquipaCasa;
+        return setupEquipaFora;
+    }
+
+    /**
+     * Função privada que devolve o setup da equipa sem a bola
+     * @return O SetupEquipa da equipa que não possui a bola
+     */
+    private SetupEquipa getSetupSemBola() {
+        if (equipaEmPosse.equals(equipaCasa))
+            return setupEquipaFora;
+        return setupEquipaCasa;
+    }
+
+    /**
+     * Devolve o nome da equipa que não possui a bola
+     * @return O nome da equipa que não possui a bola
+     */
+    private String getEquipaSemPosse() {
+        if (equipaEmPosse.equals(equipaCasa))
+            return equipaFora;
+        return equipaCasa;
+    }
+
+    /**
+     * Tenta passar a bola para um jogador da mesma equipa
+     * @param model O modelo
+     * @param jogador O jogador a quem passar a bola
+     * @return O evento de passagem de bola
+     */
+    private PassagemBola tentaPassarBola(FootballManagerModel model, double tempo, int jogador) {
+        Jogador jogadorAtual = model.getEquipa(equipaEmPosse).getJogador(jogadorEmPosse);
+        double probabilidadeConseguirPassar = (double) jogadorAtual.getPasse() / 100;
+        List<Integer> defesasAdversarios = getSetupSemBola().getDefesas();
+        int nDefesaAdversario = defesasAdversarios.get(random.nextInt(defesasAdversarios.size()));
+        Jogador jogadorDefesa = model.getEquipa(getEquipaSemPosse()).getJogador(nDefesaAdversario);
+
+        // Dividimos por 200, para que nunca seja mais do que 50%
+        double probabilidadeDefender = jogadorDefesa.getHabilidade() / 200;
+
+        if (random.nextDouble() < probabilidadeConseguirPassar && random.nextDouble() > probabilidadeDefender) {
+            PassagemBola p = new PassagemBola(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, equipaEmPosse, jogador);
+            tempoComBola += tempo;
+            jogadorEmPosse = jogador;
+            return p;
+        } else {
+            PassagemBola p = new PassagemBola(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, getEquipaSemPosse(), nDefesaAdversario);
+            tempoComBola = 0;
+            equipaEmPosse = getEquipaSemPosse();
+            jogadorEmPosse = nDefesaAdversario;
+            return p;
+        }
+    }
+
+    /**
+     * Tenta marcar um golo com o jogador atual
+     * @param model O modelo
+     * @return O eventual evento de marcar um golo, ou outro, caso não seja possível marcar
+     */
+    private EventoJogo tentaMarcar(FootballManagerModel model, double tempo) {
+        Jogador jogadorAtual = model.getEquipa(equipaEmPosse).getJogador(jogadorEmPosse);
+        double probabilidadeConseguirMarcar = (double) jogadorAtual.getRemate() / 100;
+        Jogador guardaRedes = model.getEquipa(getEquipaSemPosse()).getJogador(getSetupSemBola().getGuardaRedes());
+        double probabilidadeDefender = guardaRedes.getHabilidade() / 125; // Máx. 80% probabilidade de defender
+
+        if (random.nextDouble() < probabilidadeConseguirMarcar && random.nextDouble() > probabilidadeDefender) {
+            // Conseguimos marcar!
+            tempoComBola = 0;
+            return new Golo(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, getEquipaSemPosse());
+        } else {
+            PassagemBola p = new PassagemBola(ultimoEvento.getTempo() + tempo, equipaEmPosse, jogadorEmPosse, getEquipaSemPosse(), guardaRedes.getNumeroJogador());
+            tempoComBola = 0;
+            equipaEmPosse = getEquipaSemPosse();
+            jogadorEmPosse = guardaRedes.getNumeroJogador();
+            return p;
+        }
+    }
+
     /***
      * Avança a simulação até ao próximo evento
      * @param model O modelo a utilizar para avançar a simulação
@@ -258,8 +344,13 @@ public class Jogo {
             Equipa equipaAtual = model.getEquipa(equipaEmPosse);
             Jogador jogadorAtual = equipaAtual.getJogador(jogadorEmPosse);
             if (tempoComBola + tempoPassado > 45) {
-                // TODO: Se calhar aqui o melhor é tentar passar para um avançado primeiro!
-
+                if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
+                    List<Integer> avancados = getSetupComBola().getAvancados();
+                    int avancado = avancados.get(random.nextInt(avancados.size()));
+                    ultimoEvento = tentaPassarBola(model, tempoPassado, avancado);
+                } else {
+                    ultimoEvento = tentaMarcar(model, tempoPassado);
+                }
             }
         }
 

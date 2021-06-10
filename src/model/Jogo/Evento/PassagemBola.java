@@ -7,34 +7,48 @@ import model.Jogador.Jogador;
  * Isto representa qualquer evento em que a bola passa de um jogador a outro, quer seja dentro da mesma equipa ou não.
  */
 public class PassagemBola extends EventoJogo {
-    private Jogador antes;
-    private Jogador depois;
+    private int jogadorAntes;
+    private String equipaAntes;
+    private int jogadorDepois;
+    private String equipaDepois;
 
-    /***
-     * Construtor parameterizado
-     * @param tempo Tempo, em segundos, a que ocorre a passagem
-     * @param antes Jogador que perdeu a bola
-     * @param depois Jogador que passou a ter a posse da bola
-     */
-    public PassagemBola(double tempo, Jogador antes, Jogador depois) {
+    public PassagemBola(double tempo, String equipaAntes, int jogadorAntes, String equipaDepois, int jogadorDepois) {
         super(tempo);
-        this.antes = antes.clone();
-        this.depois = depois.clone();
+        this.equipaAntes = equipaAntes;
+        this.jogadorAntes = jogadorAntes;
+        this.equipaDepois = equipaDepois;
+        this.jogadorDepois = jogadorDepois;
     }
 
-    /***
-     * Devolve o jogador que tinha a bola anteriormente
-     * @return O jogador que tinha a bola anteriormente
-     */
-    public Jogador getAntes() {
-        return antes.clone();
+    public int getJogadorAntes() {
+        return jogadorAntes;
     }
 
-    /***
-     * Devolve o jogador que passou a ter a bola
-     * @return O jogador que passou a ter a bola
-     */
-    public Jogador getDepois() {
-        return depois.clone();
+    public void setJogadorAntes(int jogadorAntes) {
+        this.jogadorAntes = jogadorAntes;
+    }
+
+    public String getEquipaAntes() {
+        return equipaAntes;
+    }
+
+    public void setEquipaAntes(String equipaAntes) {
+        this.equipaAntes = equipaAntes;
+    }
+
+    public int getJogadorDepois() {
+        return jogadorDepois;
+    }
+
+    public void setJogadorDepois(int jogadorDepois) {
+        this.jogadorDepois = jogadorDepois;
+    }
+
+    public String getEquipaDepois() {
+        return equipaDepois;
+    }
+
+    public void setEquipaDepois(String equipaDepois) {
+        this.equipaDepois = equipaDepois;
     }
 }

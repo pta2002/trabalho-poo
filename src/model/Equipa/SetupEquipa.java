@@ -1,6 +1,5 @@
 
 package model.Equipa;
-import model.Exceptions.Jogo.JogadorForaDeCampoException;
 import model.Jogador.Jogador;
 import model.Jogo.ModeloTatico;
 import model.Jogo.PosicaoJogador;
@@ -146,7 +145,7 @@ public class SetupEquipa {
         return avancados;
     }
 
-    public PosicaoJogador getPosicaoJogador(int jogador) throws JogadorForaDeCampoException {
+    public PosicaoJogador getPosicaoJogador(int jogador) {
         for (int i = 0; i < emCampo.size(); i++) {
             if (emCampo.get(i) == jogador) {
                 if (i == 0) {
@@ -161,6 +160,6 @@ public class SetupEquipa {
             }
         }
 
-        throw new JogadorForaDeCampoException();
+        return null;
     }
 }

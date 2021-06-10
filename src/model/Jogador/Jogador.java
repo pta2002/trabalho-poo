@@ -80,7 +80,7 @@ public abstract class Jogador {
         this.passe = passe;
     }
 
-    abstract double getHabilidade();
+    public abstract double getHabilidade();
 
     /* ----------------------------------------------------------- Clone */
     @Override
