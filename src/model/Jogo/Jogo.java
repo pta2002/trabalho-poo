@@ -35,6 +35,7 @@ public class Jogo {
         date = LocalDate.now();
         substituicoesCasa = new HashMap<>();
         substitucoesFora = new HashMap<>();
+        random = new Random();
     }
 
     /***
@@ -50,6 +51,7 @@ public class Jogo {
         this.setupEquipaFora = new SetupEquipa(ef); // random setup
         substituicoesCasa = new HashMap<>();
         substitucoesFora = new HashMap<>();
+        random = new Random();
     }
 
     /**
@@ -74,6 +76,7 @@ public class Jogo {
         this.setupEquipaFora = new SetupEquipa(jf);
         substituicoesCasa = new HashMap<>(sc);
         substitucoesFora = new HashMap<>(sf);
+        random = new Random();
     }
 
     /**
