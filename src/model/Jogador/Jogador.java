@@ -13,6 +13,8 @@ public abstract class Jogador implements Serializable {
     protected int numeroJogador;
     protected int velocidade, resistencia, destreza, impulsao, cabeca, remate, passe;
     protected List<String> historialEquipas;
+    private static final long serialVersionUID = 4L;
+
 
     /* ----------------------------------------------------------- Getter's e Setter's */
     public String getNomeJogador() {

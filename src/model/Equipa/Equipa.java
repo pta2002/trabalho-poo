@@ -12,8 +12,9 @@ import java.util.stream.Collectors;
 public class Equipa implements Serializable {
     /* ----------------------------------------------------------- Atributos */
     private String nome;
-
     private Map<Integer,Jogador> jogadores;
+    private static final long serialVersionUID = 2L;
+
 
     /* ----------------------------------------------------------- Construtores */
     public Equipa(String nomeEquipa) {

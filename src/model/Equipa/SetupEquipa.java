@@ -15,6 +15,8 @@ public class SetupEquipa implements Serializable {
     private List<Integer> titulares;
     private List<Integer> emCampo;
     private List<Integer> noBanco;
+    private static final long serialVersionUID = 3L;
+
 
     public SetupEquipa(Equipa equipa) {
         this.modeloTatico = ModeloTatico.getRandomModeloTatico();

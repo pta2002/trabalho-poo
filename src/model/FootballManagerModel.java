@@ -13,8 +13,9 @@ import java.util.stream.Collectors;
 
 public class FootballManagerModel implements Serializable {
     /* ----------------------------------------------------------- Atributos */
-    Map<String, Equipa> equipas;
-    List<Jogo> jogos;
+    private Map<String, Equipa> equipas;
+    private List<Jogo> jogos;
+    private static final long serialVersionUID = 1L;
 
     /* ---------------------------------------------------------- Construtores */
     /***
@@ -96,15 +97,15 @@ public class FootballManagerModel implements Serializable {
     public void insereEquipa(String equipa) {
         Equipa novaEquipa = new Equipa(equipa);
         this.equipas.put(equipa,novaEquipa);
-        
     }
+
     void writeObjectFile(String filename) throws IOException {
         FileOutputStream fos = new FileOutputStream(filename);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this);
         oos.close();
     }
-    FootballManagerModel readObjectFIle(String filename) throws IOException, ClassNotFoundException {
+    FootballManagerModel readObjectFile(String filename) throws IOException, ClassNotFoundException {
         FileInputStream fos = new FileInputStream(filename);
         ObjectInputStream oos = new ObjectInputStream(fos);
         FootballManagerModel r = (FootballManagerModel) oos.readObject();
@@ -112,4 +113,20 @@ public class FootballManagerModel implements Serializable {
         return r;
     }
 
+    FootballManagerModel load_from_file(String filename) throws IOException, ClassNotFoundException, LinhaIncorretaException {
+          FootballManagerModel r ;
+          String extension = "";
+          int index;
+          if ((index = filename.lastIndexOf('.')) > 0) {
+              extension = filename.substring(index + 1);
+          }
+          if(extension.equals("ser") || extension.equals("dat") || extension.equals("o") || extension.equals("obj")) {
+              r = readObjectFile(filename);
+          }
+          else {
+              r = new FootballManagerModel();
+              Parser.loadDatabase(r);
+          }
+          return r;
+    }
 }

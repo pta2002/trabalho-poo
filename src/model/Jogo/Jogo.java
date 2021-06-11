@@ -26,6 +26,8 @@ public class Jogo implements Serializable {
     private String equipaEmPosse;
     private int jogadorEmPosse;
     private boolean passouIntervalo;
+    private static final long serialVersionUID = 6L;
+
 
     /***
      * Cria um jogo vazio

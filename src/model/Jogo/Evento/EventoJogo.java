@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public abstract class EventoJogo implements Serializable {
     private double tempo;
+    private static final long serialVersionUID = 5L;
 
     public EventoJogo(double tempo) {
         this.tempo = tempo;

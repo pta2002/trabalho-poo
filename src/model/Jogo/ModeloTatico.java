@@ -6,6 +6,8 @@ public class ModeloTatico implements Serializable {
     private int numDefesas;
     private int numMedios;
     private int numAvancados;
+    private static final long serialVersionUID = 7L;
+
 
     public ModeloTatico(int numDefesas, int numMedios, int numAvancados) {
         this.numDefesas = numDefesas;
