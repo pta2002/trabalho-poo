@@ -93,29 +93,24 @@
       </menus>
     </MenuBar>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
-        <items>
-          <Button mnemonicParsing="false" text="Button" />
-        </items>
+         <items>
+          <Button mnemonicParsing="false" text="Simular" />
+         </items>
       </ToolBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.6458797327394209" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
-          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-              </textFill>
-            </Label>
-          </children>
-        </AnchorPane>
+            <VBox fx:id="equipas" prefHeight="200.0" prefWidth="100.0" />
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
               <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Wagner Athletic" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                <Label fx:id="nomeEquipa" alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="Wagner Athletic" textAlignment="CENTER" wrapText="false">
+                           <font>
+                      <Font size="18.0" fx:id="x1" />
+                           </font>
+                           <textFill>
+                      <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
+                           </textFill></Label>
               </children>
             </AnchorPane>
           </content>
