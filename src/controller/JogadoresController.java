@@ -5,6 +5,7 @@ import model.Jogador.*;
 import view.EquipaView;
 import view.JogadoresView;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class JogadoresController extends Menu {
@@ -81,32 +82,32 @@ public class JogadoresController extends Menu {
         if (posicaoJ.toString().equals("GuardaRedes")) {
             view.mensagens(11);
             int elasticidade = is.nextInt();
-            GuardaRedes guardaRedes = new GuardaRedes(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, elasticidade);
+            GuardaRedes guardaRedes = new GuardaRedes(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, elasticidade, new ArrayList<>());
             model.insereJogador(guardaRedes,equipa.toString());
 
         }
 
         if (posicaoJ.toString().equals("Defesa")) {
-            Defesa defesa = new Defesa(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p);
+            Defesa defesa = new Defesa(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, new ArrayList<>());
             model.insereJogador(defesa,equipa.toString());
         }
 
         if (posicaoJ.toString().equals("Lateral")) {
             view.mensagens(12);
             int cruzamento = is.nextInt();
-            Lateral lateral = new Lateral(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, cruzamento);
+            Lateral lateral = new Lateral(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, cruzamento, new ArrayList<>());
             model.insereJogador(lateral,equipa.toString());
         }
 
         if (posicaoJ.toString().equals("Medio")) {
             view.mensagens(13);
             int recuperacao = is.nextInt();
-            Medio medio = new Medio(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, recuperacao);
+            Medio medio = new Medio(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, recuperacao, new ArrayList<>());
             model.insereJogador(medio,equipa.toString());
         }
 
         if (posicaoJ.toString().equals("Avancado")) {
-            Avancado avancado = new Avancado(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p);
+            Avancado avancado = new Avancado(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p, new ArrayList<>());
             model.insereJogador(avancado,equipa.toString());
         }
 

@@ -2,45 +2,51 @@ package model.Jogador;
 
 import model.Jogo.PosicaoJogador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Defesa extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     /* TODO */
 
     /* ---------------------------------------------------------- Construtores */
     public Defesa(){
-        super.nomeJogador = "unknown";
-        super.numeroJogador = 0;
-        super.velocidade = 50;
-        super.resistencia = 50;
-        super.destreza = 50;
-        super.impulsao = 50;
-        super.cabeca = 50;
-        super.remate = 50;
-        super.passe = 50;
+        this.nomeJogador = "unknown";
+        this.numeroJogador = 0;
+        this.velocidade = 50;
+        this.resistencia = 50;
+        this.destreza = 50;
+        this.impulsao = 50;
+        this.cabeca = 50;
+        this.remate = 50;
+        this.passe = 50;
+        this.historialEquipas = new ArrayList<>();
     }
 
-    public Defesa(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p) {
-        super.nomeJogador = nomeJ;
-        super.numeroJogador = numeroJ;
-        super.velocidade = vel;
-        super.resistencia = res;
-        super.destreza = des;
-        super.impulsao = imp;
-        super.cabeca = cab;
-        super.remate = rem;
-        super.passe = p;
+    public Defesa(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, List<String> e) {
+        this.nomeJogador = nomeJ;
+        this.numeroJogador = numeroJ;
+        this.velocidade = vel;
+        this.resistencia = res;
+        this.destreza = des;
+        this.impulsao = imp;
+        this.cabeca = cab;
+        this.remate = rem;
+        this.passe = p;
+        this.historialEquipas = new ArrayList<>(e);
     }
 
     public Defesa(Defesa defesa){
-        super.nomeJogador = defesa.getNomeJogador();
-        super.numeroJogador = defesa.getNumeroJogador();
-        super.velocidade = defesa.getVelocidade();
-        super.resistencia = defesa.getResistencia();
-        super.destreza = defesa.getDestreza();
-        super.impulsao = defesa.getImpulsao();
-        super.cabeca = defesa.getCabeca();
-        super.remate = defesa.getRemate();
-        super.passe = defesa.getPasse();
+        this.nomeJogador = defesa.getNomeJogador();
+        this.numeroJogador = defesa.getNumeroJogador();
+        this.velocidade = defesa.getVelocidade();
+        this.resistencia = defesa.getResistencia();
+        this.destreza = defesa.getDestreza();
+        this.impulsao = defesa.getImpulsao();
+        this.cabeca = defesa.getCabeca();
+        this.remate = defesa.getRemate();
+        this.passe = defesa.getPasse();
+        this.historialEquipas = defesa.getHistorialEquipas();
     }
 
     /* ----------------------------------------------------------- Parsing */
@@ -53,7 +59,8 @@ public class Defesa extends Jogador {
                 Integer.parseInt(campos[5]),
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
-                Integer.parseInt(campos[8]));
+                Integer.parseInt(campos[8]),
+                new ArrayList<>());
     }
 
     /* ----------------------------------------------------------- Clone */

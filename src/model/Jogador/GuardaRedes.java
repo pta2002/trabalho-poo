@@ -2,49 +2,56 @@ package model.Jogador;
 
 import model.Jogo.PosicaoJogador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GuardaRedes extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     private int elasticidade;
 
     /* ----------------------------------------------------------- Construtores */
     public GuardaRedes(){
-        super.nomeJogador = "unknown";
-        super.numeroJogador = 0;
-        super.velocidade = 50;
-        super.resistencia = 50;
-        super.destreza = 50;
-        super.impulsao = 50;
-        super.cabeca = 50;
-        super.remate = 50;
-        super.passe = 50;
+        this.nomeJogador = "unknown";
+        this.numeroJogador = 0;
+        this.velocidade = 50;
+        this.resistencia = 50;
+        this.destreza = 50;
+        this.impulsao = 50;
+        this.cabeca = 50;
+        this.remate = 50;
+        this.passe = 50;
+
+        this.historialEquipas = new ArrayList<>();
 
         this.elasticidade = 50;
     }
 
-    public GuardaRedes (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int elast) {
-        super.nomeJogador = nomeJ;
-        super.numeroJogador = numeroJ;
-        super.velocidade = vel;
-        super.resistencia = res;
-        super.destreza = des;
-        super.impulsao = imp;
-        super.cabeca = cab;
-        super.remate = rem;
-        super.passe = p;
+    public GuardaRedes (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int elast, List<String> e) {
+        this.nomeJogador = nomeJ;
+        this.numeroJogador = numeroJ;
+        this.velocidade = vel;
+        this.resistencia = res;
+        this.destreza = des;
+        this.impulsao = imp;
+        this.cabeca = cab;
+        this.remate = rem;
+        this.passe = p;
+        this.historialEquipas = new ArrayList<>(e);
 
         this.elasticidade = elast;
     }
 
     public GuardaRedes(GuardaRedes guardaRedes){
-        super.nomeJogador = guardaRedes.getNomeJogador();
-        super.numeroJogador = guardaRedes.getNumeroJogador();
-        super.velocidade = guardaRedes.getVelocidade();
-        super.resistencia = guardaRedes.getResistencia();
-        super.destreza = guardaRedes.getDestreza();
-        super.impulsao = guardaRedes.getImpulsao();
-        super.cabeca = guardaRedes.getCabeca();
-        super.remate = guardaRedes.getRemate();
-        super.passe = guardaRedes.getPasse();
+        this.nomeJogador = guardaRedes.getNomeJogador();
+        this.numeroJogador = guardaRedes.getNumeroJogador();
+        this.velocidade = guardaRedes.getVelocidade();
+        this.resistencia = guardaRedes.getResistencia();
+        this.destreza = guardaRedes.getDestreza();
+        this.impulsao = guardaRedes.getImpulsao();
+        this.cabeca = guardaRedes.getCabeca();
+        this.remate = guardaRedes.getRemate();
+        this.passe = guardaRedes.getPasse();
+        this.historialEquipas = guardaRedes.getHistorialEquipas();
     }
 
     /* ----------------------------------------------------------- Parsing */
@@ -58,7 +65,8 @@ public class GuardaRedes extends Jogador {
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
-                Integer.parseInt(campos[9]));
+                Integer.parseInt(campos[9]),
+                new ArrayList<>());
     }
 
     /* ----------------------------------------------------------- Clone */

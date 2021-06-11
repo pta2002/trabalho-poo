@@ -2,45 +2,51 @@ package model.Jogador;
 
 import model.Jogo.PosicaoJogador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Avancado extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     /* TODO */
 
     /* ----------------------------------------------------------- Construtores */
     public Avancado(){
-        super.nomeJogador = "unknown";
-        super.numeroJogador = 0;
-        super.velocidade = 50;
-        super.resistencia = 50;
-        super.destreza = 50;
-        super.impulsao = 50;
-        super.cabeca = 50;
-        super.remate = 50;
-        super.passe = 50;
+        this.nomeJogador = "unknown";
+        this.numeroJogador = 0;
+        this.velocidade = 50;
+        this.resistencia = 50;
+        this.destreza = 50;
+        this.impulsao = 50;
+        this.cabeca = 50;
+        this.remate = 50;
+        this.passe = 50;
+        this.historialEquipas = new ArrayList<>();
     }
 
-    public Avancado(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p) {
-        super.nomeJogador = nomeJ;
-        super.numeroJogador = numeroJ;
-        super.velocidade = vel;
-        super.resistencia = res;
-        super.destreza = des;
-        super.impulsao = imp;
-        super.cabeca = cab;
-        super.remate = rem;
-        super.passe = p;
+    public Avancado(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, List<String> e) {
+        this.nomeJogador = nomeJ;
+        this.numeroJogador = numeroJ;
+        this.velocidade = vel;
+        this.resistencia = res;
+        this.destreza = des;
+        this.impulsao = imp;
+        this.cabeca = cab;
+        this.remate = rem;
+        this.passe = p;
+        this.historialEquipas = new ArrayList<>(e);
     }
 
     public Avancado(Avancado avancado){
-        super.nomeJogador = avancado.getNomeJogador();
-        super.numeroJogador = avancado.getNumeroJogador();
-        super.velocidade = avancado.getVelocidade();
-        super.resistencia = avancado.getResistencia();
-        super.destreza = avancado.getDestreza();
-        super.impulsao = avancado.getImpulsao();
-        super.cabeca = avancado.getCabeca();
-        super.remate = avancado.getRemate();
-        super.passe = avancado.getPasse();
+        this.nomeJogador = avancado.getNomeJogador();
+        this.numeroJogador = avancado.getNumeroJogador();
+        this.velocidade = avancado.getVelocidade();
+        this.resistencia = avancado.getResistencia();
+        this.destreza = avancado.getDestreza();
+        this.impulsao = avancado.getImpulsao();
+        this.cabeca = avancado.getCabeca();
+        this.remate = avancado.getRemate();
+        this.passe = avancado.getPasse();
+        this.historialEquipas = avancado.getHistorialEquipas();
     }
 
     /* ----------------------------------------------------------- Parsing */
@@ -53,7 +59,8 @@ public class Avancado extends Jogador {
                 Integer.parseInt(campos[5]),
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
-                Integer.parseInt(campos[8]));
+                Integer.parseInt(campos[8]),
+                new ArrayList<>());
     }
 
     /* ----------------------------------------------------------- Clone */

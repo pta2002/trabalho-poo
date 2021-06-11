@@ -2,49 +2,55 @@ package model.Jogador;
 
 import model.Jogo.PosicaoJogador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lateral extends Jogador {
     /* ----------------------------------------------------------- Atributos */
     private int cruzamento;
 
     /* ----------------------------------------------------------- Construtores */
     public Lateral(){
-        super.nomeJogador = "unknown";
-        super.numeroJogador = 0;
-        super.velocidade = 50;
-        super.resistencia = 50;
-        super.destreza = 50;
-        super.impulsao = 50;
-        super.cabeca = 50;
-        super.remate = 50;
-        super.passe = 50;
+        this.nomeJogador = "unknown";
+        this.numeroJogador = 0;
+        this.velocidade = 50;
+        this.resistencia = 50;
+        this.destreza = 50;
+        this.impulsao = 50;
+        this.cabeca = 50;
+        this.remate = 50;
+        this.passe = 50;
+        this.historialEquipas = new ArrayList<>();
 
         this.cruzamento = 50;
     }
 
-    public Lateral(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int cruz) {
-        super.nomeJogador = nomeJ;
-        super.numeroJogador = numeroJ;
-        super.velocidade = vel;
-        super.resistencia = res;
-        super.destreza = des;
-        super.impulsao = imp;
-        super.cabeca = cab;
-        super.remate = rem;
-        super.passe = p;
+    public Lateral(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int cruz, List<String> e) {
+        this.nomeJogador = nomeJ;
+        this.numeroJogador = numeroJ;
+        this.velocidade = vel;
+        this.resistencia = res;
+        this.destreza = des;
+        this.impulsao = imp;
+        this.cabeca = cab;
+        this.remate = rem;
+        this.passe = p;
+        this.historialEquipas = new ArrayList<>(e);
 
         this.cruzamento = cruz;
     }
 
     public Lateral(Lateral lateral){
-        super.nomeJogador = lateral.getNomeJogador();
-        super.numeroJogador = lateral.getNumeroJogador();
-        super.velocidade = lateral.getVelocidade();
-        super.resistencia = lateral.getResistencia();
-        super.destreza = lateral.getDestreza();
-        super.impulsao = lateral.getImpulsao();
-        super.cabeca = lateral.getCabeca();
-        super.remate = lateral.getRemate();
-        super.passe = lateral.getPasse();
+        this.nomeJogador = lateral.getNomeJogador();
+        this.numeroJogador = lateral.getNumeroJogador();
+        this.velocidade = lateral.getVelocidade();
+        this.resistencia = lateral.getResistencia();
+        this.destreza = lateral.getDestreza();
+        this.impulsao = lateral.getImpulsao();
+        this.cabeca = lateral.getCabeca();
+        this.remate = lateral.getRemate();
+        this.passe = lateral.getPasse();
+        this.historialEquipas = lateral.getHistorialEquipas();
     }
 
     /* ----------------------------------------------------------- Parsing */
@@ -58,7 +64,8 @@ public class Lateral extends Jogador {
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
-                Integer.parseInt(campos[9]));
+                Integer.parseInt(campos[9]),
+                new ArrayList<>());
     }
 
     /* ----------------------------------------------------------- Getter's e Setter's */

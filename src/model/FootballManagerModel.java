@@ -82,6 +82,7 @@ public class FootballManagerModel {
     /* ---------------------------------------------------------- Insere Jogador numa equipa*/
     public void insereJogador(Jogador jog, String equipa) {
         Equipa value = this.equipas.get(equipa);
+        jog.addEquipa(equipa);
         value.insereJogador(jog);
         this.equipas.replace(equipa,value);
     }
