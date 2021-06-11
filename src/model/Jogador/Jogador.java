@@ -2,10 +2,11 @@ package model.Jogador;
 
 import model.Jogo.PosicaoJogador;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Jogador {
+public abstract class Jogador implements Serializable {
 
     /* ----------------------------------------------------------- Atributos */
     protected String nomeJogador;

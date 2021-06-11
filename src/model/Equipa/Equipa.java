@@ -2,13 +2,14 @@ package model.Equipa;
 
 import model.Jogador.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Equipa {
+public class Equipa implements Serializable {
     /* ----------------------------------------------------------- Atributos */
     private String nome;
 

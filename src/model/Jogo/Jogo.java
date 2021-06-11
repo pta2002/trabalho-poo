@@ -6,10 +6,11 @@ import model.FootballManagerModel;
 import model.Jogador.Jogador;
 import model.Jogo.Evento.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Jogo {
+public class Jogo implements Serializable {
     private String equipaCasa;
     private String equipaFora;
     private int golosCasa;

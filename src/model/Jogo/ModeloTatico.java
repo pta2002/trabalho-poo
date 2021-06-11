@@ -1,7 +1,8 @@
 package model.Jogo;
+import java.io.Serializable;
 import java.util.*;
 
-public class ModeloTatico {
+public class ModeloTatico implements Serializable {
     private int numDefesas;
     private int numMedios;
     private int numAvancados;

@@ -4,11 +4,12 @@ import model.Jogador.Jogador;
 import model.Jogo.ModeloTatico;
 import model.Jogo.PosicaoJogador;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class SetupEquipa {
+public class SetupEquipa implements Serializable {
     private Equipa equipa;
     private ModeloTatico modeloTatico;
     private List<Integer> titulares;

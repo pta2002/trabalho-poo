@@ -67,7 +67,6 @@ public class EquipaController extends Menu {
             equipa.delete(0,equipa.length());
             equipa.append(is.nextLine());
         }
-
         model.insereEquipa(equipa.toString());
     }
 }

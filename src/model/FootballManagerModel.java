@@ -4,13 +4,14 @@ import model.Equipa.Equipa;
 import model.Jogador.Jogador;
 import model.Jogo.Jogo;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FootballManagerModel {
+public class FootballManagerModel implements Serializable {
     /* ----------------------------------------------------------- Atributos */
     Map<String, Equipa> equipas;
     List<Jogo> jogos;
@@ -23,7 +24,6 @@ public class FootballManagerModel {
         this.equipas = new HashMap<>();
         this.jogos = new ArrayList<>();
     }
-
     /***
      * Construtor parametrizado
      * @param equipas equipas
@@ -96,5 +96,20 @@ public class FootballManagerModel {
     public void insereEquipa(String equipa) {
         Equipa novaEquipa = new Equipa(equipa);
         this.equipas.put(equipa,novaEquipa);
+        
     }
+    void writeObjectFile(String filename) throws IOException {
+        FileOutputStream fos = new FileOutputStream(filename);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.close();
+    }
+    FootballManagerModel readObjectFIle(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fos = new FileInputStream(filename);
+        ObjectInputStream oos = new ObjectInputStream(fos);
+        FootballManagerModel r = (FootballManagerModel) oos.readObject();
+        oos.close();
+        return r;
+    }
+
 }

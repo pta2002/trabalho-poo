@@ -1,9 +1,11 @@
 package model.Jogo.Evento;
 
+import java.io.Serializable;
+
 /***
  * Representa um evento que ocorreu no jogo, a um determinado tempo
  */
-public abstract class EventoJogo {
+public abstract class EventoJogo implements Serializable {
     private double tempo;
 
     public EventoJogo(double tempo) {
