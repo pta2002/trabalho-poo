@@ -15,6 +15,9 @@ public class FootballManagerView {
     @FXML
     private ScrollPane infoEquipa;
 
+    @FXML
+    private VBox listaJogadores;
+
     public FootballManagerView() {
         equipas = new VBox();
         infoEquipa = new ScrollPane();
@@ -28,5 +31,11 @@ public class FootballManagerView {
 
     public void addInfoEquipa(Node equipa) {
         infoEquipa.setContent(equipa);
+    }
+
+    public void addListaJogadores(VBox jogadoresView) {
+        jogadoresView.setFillWidth(true);
+        VBox.setVgrow(listaJogadores, Priority.ALWAYS);
+        listaJogadores.getChildren().add(jogadoresView);
     }
 }
