@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
@@ -16,5 +17,9 @@ public class FXListaEquipasView {
 
     public void setEquipas(List<String> equipas) {
         lista.getItems().setAll(equipas.stream().sorted().collect(Collectors.toList()));
+    }
+
+    public ObservableList<String> getEquipasSelecionadas() {
+        return lista.getSelectionModel().getSelectedItems();
     }
 }

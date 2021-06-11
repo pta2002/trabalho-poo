@@ -73,6 +73,10 @@ public class Equipa {
         return total/cont;
     }
 
+    public double getOverall() {
+        return (getMediosOverall() + getAvancadosOverall() + getDefesaOverall()) / 3;
+    }
+
     public boolean existeJogador(int numero) {
         boolean existe = false;
         for (Jogador jogador: this.jogadores.values()) {

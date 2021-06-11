@@ -31,7 +31,7 @@ public class App extends Application {
 
         FXMLLoader uiLoader = new FXMLLoader(getClass().getResource("ui.fxml"));
         uiLoader.setController(view);
-        primaryStage.setScene(new Scene(uiLoader.load(), 800, 600));
+        primaryStage.setScene(new Scene(uiLoader.load(), 1280, 728));
         primaryStage.setTitle("Football Manager");
         primaryStage.show();
 
