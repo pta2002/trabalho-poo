@@ -14,7 +14,6 @@ public class SetupEquipa {
     private List<Integer> titulares;
     private List<Integer> emCampo;
     private List<Integer> noBanco;
-    private static final Random random = new Random();
 
     public SetupEquipa(Equipa equipa) {
         this.modeloTatico = ModeloTatico.getRandomModeloTatico();
@@ -161,5 +160,13 @@ public class SetupEquipa {
         }
 
         return null;
+    }
+
+    public void substituir(int antes, int depois) {
+        for (int i = 0; i < emCampo.size(); i++) {
+            if (emCampo.get(i) == antes) {
+                emCampo.set(i, depois);
+            }
+        }
     }
 }

@@ -339,6 +339,31 @@ public class Jogo {
         }
     }
 
+    private Substituicao executaSubstituicao(double tempo) {
+        if (random.nextBoolean()) {
+            // Equipa de casa
+            if (substituicoesCasa.size() > 0) {
+                int aSubstituir = (int) substituicoesCasa.keySet().toArray()[random.nextInt(substituicoesCasa.size())];
+                setupEquipaCasa.substituir(aSubstituir, substituicoesCasa.get(aSubstituir));
+                if (equipaEmPosse.equals(equipaCasa) && jogadorEmPosse == aSubstituir) {
+                    jogadorEmPosse = substituicoesCasa.get(aSubstituir);
+                }
+                return new Substituicao(tempo + ultimoEvento.getTempo(), equipaCasa, aSubstituir, substituicoesCasa.get(aSubstituir));
+            }
+        } else {
+            if (substitucoesFora.size() > 0) {
+                int aSubstituir = (int) substitucoesFora.keySet().toArray()[random.nextInt(substitucoesFora.size())];
+                setupEquipaFora.substituir(aSubstituir, substitucoesFora.get(aSubstituir));
+                if (equipaEmPosse.equals(equipaFora) && jogadorEmPosse == aSubstituir) {
+                    jogadorEmPosse = substitucoesFora.get(aSubstituir);
+                }
+                return new Substituicao(tempo + ultimoEvento.getTempo(), equipaFora, aSubstituir, substitucoesFora.get(aSubstituir));
+            }
+        }
+
+        return null;
+    }
+
     /***
      * Avança a simulação até ao próximo evento
      * @param model O modelo a utilizar para avançar a simulação
@@ -372,22 +397,36 @@ public class Jogo {
                 // O jogo acabou!
                 ultimoEvento = null;
             } else {
-                Equipa equipaAtual = model.getEquipa(equipaEmPosse);
-                // Se a mesma equipa esteve 30 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
-                if (tempoComBola + tempoPassado > 30) {
-                    if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
-                        List<Integer> avancados = getSetupComBola().getAvancados();
-                        int avancado = avancados.get(random.nextInt(avancados.size()));
-                        ultimoEvento = tentaPassarBola(model, tempoPassado, avancado);
-                    } else {
-                        ultimoEvento = tentaMarcar(model, tempoPassado);
-                    }
-                } else {
-                    List<Integer> jogadoresAPassar = getSetupComBola().getAvancados();
-                    jogadoresAPassar.addAll(getSetupComBola().getMedios());
-                    int jogador = jogadoresAPassar.get(random.nextInt(jogadoresAPassar.size()));
+                boolean substituiu = false;
 
-                    ultimoEvento = tentaPassarBola(model, tempoPassado, jogador);
+                if (passouIntervalo) {
+                    // Podemos fazer substituições
+                    if (random.nextDouble() > 0.80) {
+                        Substituicao s = executaSubstituicao(tempoPassado);
+                        if (s != null) {
+                            ultimoEvento = s;
+                            substituiu = true;
+                        }
+                    }
+                }
+
+                if (!substituiu) {
+                    // Se a mesma equipa esteve 30 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
+                    if (tempoComBola + tempoPassado > 30) {
+                        if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
+                            List<Integer> avancados = getSetupComBola().getAvancados();
+                            int avancado = avancados.get(random.nextInt(avancados.size()));
+                            ultimoEvento = tentaPassarBola(model, tempoPassado, avancado);
+                        } else {
+                            ultimoEvento = tentaMarcar(model, tempoPassado);
+                        }
+                    } else {
+                        List<Integer> jogadoresAPassar = getSetupComBola().getAvancados();
+                        jogadoresAPassar.addAll(getSetupComBola().getMedios());
+                        int jogador = jogadoresAPassar.get(random.nextInt(jogadoresAPassar.size()));
+
+                        ultimoEvento = tentaPassarBola(model, tempoPassado, jogador);
+                    }
                 }
             }
         }
