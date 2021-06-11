@@ -4,10 +4,7 @@ import model.Equipa.Equipa;
 import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
 import model.Jogador.Jogador;
-import model.Jogo.Evento.EventoJogo;
-import model.Jogo.Evento.Golo;
-import model.Jogo.Evento.PassagemBola;
-import model.Jogo.Evento.PosseBola;
+import model.Jogo.Evento.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -27,6 +24,7 @@ public class Jogo {
     private double tempoComBola;
     private String equipaEmPosse;
     private int jogadorEmPosse;
+    private boolean passouIntervalo;
 
     /***
      * Cria um jogo vazio
@@ -36,6 +34,7 @@ public class Jogo {
         substituicoesCasa = new HashMap<>();
         substitucoesFora = new HashMap<>();
         random = new Random();
+        passouIntervalo = false;
     }
 
     /***
@@ -52,6 +51,7 @@ public class Jogo {
         substituicoesCasa = new HashMap<>();
         substitucoesFora = new HashMap<>();
         random = new Random();
+        passouIntervalo = false;
     }
 
     /**
@@ -77,6 +77,7 @@ public class Jogo {
         substituicoesCasa = new HashMap<>(sc);
         substitucoesFora = new HashMap<>(sf);
         random = new Random();
+        passouIntervalo = false;
     }
 
     /**
@@ -96,6 +97,11 @@ public class Jogo {
         this.ultimoEvento = jogo.getUltimoEvento();
         this.tempoComBola = jogo.getTempoComBola();
         this.random = jogo.random;
+        this.passouIntervalo = jogo.getPassouIntervalo();
+    }
+
+    private boolean getPassouIntervalo() {
+        return passouIntervalo;
     }
 
     public SetupEquipa getSetupEquipaCasa() {
@@ -339,7 +345,7 @@ public class Jogo {
      * @return O próximo evento a ocorrer. Se for null, o jogo acabou.
      */
     public EventoJogo avancaSimulacao(FootballManagerModel model) {
-        if (ultimoEvento == null) {
+        if (ultimoEvento == null || ultimoEvento.getClass() == Intervalo.class) {
             // Se o último evento for nulo, significa que o jogo vai começar, portanto determinamos a equipa que começa
             // com uma "moeda ao ar", ou seja, 50/50 para quem tem posse de bola.
             if (random.nextBoolean()) {
@@ -358,22 +364,31 @@ public class Jogo {
             ultimoEvento = new PosseBola(ultimoEvento.getTempo(), equipaEmPosse, jogadorEmPosse);
         } else {
             double tempoPassado = random.nextDouble() * 2 + 5; // Entre 3 e 7s
-            // Se a mesma equipa esteve 30 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
-            Equipa equipaAtual = model.getEquipa(equipaEmPosse);
-            if (tempoComBola + tempoPassado > 30) {
-                if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
-                    List<Integer> avancados = getSetupComBola().getAvancados();
-                    int avancado = avancados.get(random.nextInt(avancados.size()));
-                    ultimoEvento = tentaPassarBola(model, tempoPassado, avancado);
-                } else {
-                    ultimoEvento = tentaMarcar(model, tempoPassado);
-                }
+            if (tempoPassado + ultimoEvento.getTempo() >= 45 * 60 && !passouIntervalo) {
+                // Meio tempo, intervalo!
+                passouIntervalo = true;
+                ultimoEvento = new Intervalo(45 * 60);
+            } else if (tempoPassado + ultimoEvento.getTempo() >= 90 * 60) {
+                // O jogo acabou!
+                ultimoEvento = null;
             } else {
-                List<Integer> jogadoresAPassar = getSetupComBola().getAvancados();
-                jogadoresAPassar.addAll(getSetupComBola().getMedios());
-                int jogador = jogadoresAPassar.get(random.nextInt(jogadoresAPassar.size()));
+                Equipa equipaAtual = model.getEquipa(equipaEmPosse);
+                // Se a mesma equipa esteve 30 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
+                if (tempoComBola + tempoPassado > 30) {
+                    if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
+                        List<Integer> avancados = getSetupComBola().getAvancados();
+                        int avancado = avancados.get(random.nextInt(avancados.size()));
+                        ultimoEvento = tentaPassarBola(model, tempoPassado, avancado);
+                    } else {
+                        ultimoEvento = tentaMarcar(model, tempoPassado);
+                    }
+                } else {
+                    List<Integer> jogadoresAPassar = getSetupComBola().getAvancados();
+                    jogadoresAPassar.addAll(getSetupComBola().getMedios());
+                    int jogador = jogadoresAPassar.get(random.nextInt(jogadoresAPassar.size()));
 
-                ultimoEvento = tentaPassarBola(model, tempoPassado, jogador);
+                    ultimoEvento = tentaPassarBola(model, tempoPassado, jogador);
+                }
             }
         }
 
