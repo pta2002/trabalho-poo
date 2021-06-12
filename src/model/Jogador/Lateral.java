@@ -10,50 +10,18 @@ public class Lateral extends Jogador {
     private int cruzamento;
 
     /* ----------------------------------------------------------- Construtores */
-    public Lateral(){
-        this.nomeJogador = "unknown";
-        this.numeroJogador = 0;
-        this.velocidade = 50;
-        this.resistencia = 50;
-        this.destreza = 50;
-        this.impulsao = 50;
-        this.cabeca = 50;
-        this.remate = 50;
-        this.passe = 50;
-        this.historialEquipas = new ArrayList<>();
-
-        this.cruzamento = 50;
-    }
-
-    public Lateral(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int cruz, List<String> e) {
-        this.nomeJogador = nomeJ;
-        this.numeroJogador = numeroJ;
-        this.velocidade = vel;
-        this.resistencia = res;
-        this.destreza = des;
-        this.impulsao = imp;
-        this.cabeca = cab;
-        this.remate = rem;
-        this.passe = p;
-        this.historialEquipas = new ArrayList<>(e);
-
-        this.cruzamento = cruz;
+    /* ----------------------------------------------------------- Parsing */
+    public Lateral (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int cruzamento, List<String> e) {
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
+        this.cruzamento = cruzamento;
     }
 
     public Lateral(Lateral lateral){
-        this.nomeJogador = lateral.getNomeJogador();
-        this.numeroJogador = lateral.getNumeroJogador();
-        this.velocidade = lateral.getVelocidade();
-        this.resistencia = lateral.getResistencia();
-        this.destreza = lateral.getDestreza();
-        this.impulsao = lateral.getImpulsao();
-        this.cabeca = lateral.getCabeca();
-        this.remate = lateral.getRemate();
-        this.passe = lateral.getPasse();
-        this.historialEquipas = lateral.getHistorialEquipas();
+        super(lateral);
+        this.cruzamento = lateral.getCruzamento();
     }
 
-    /* ----------------------------------------------------------- Parsing */
+
     public static Lateral parse(String input){
         String[] campos = input.split(",");
         return new Lateral(campos[0], Integer.parseInt(campos[1]),
@@ -101,16 +69,16 @@ public class Lateral extends Jogador {
 
         switch (posicao){
             case GUARDA_REDES:
-                adequacao = (((double) impulsao + destreza)/(2*100))*lateralParaGuardaRedesConst;
+                adequacao = (((double) getImpulsao() + getDestreza())/(2*100))*lateralParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = (((double) cabeca + impulsao + passe)/(3*100))*lateralParaDefesaConst;
+                adequacao = (((double) getCabeca() + getImpulsao() + getPasse())/(3*100))*lateralParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = (((double) passe + velocidade + resistencia + destreza)/(4*100))*lateralParaMedioConst;
+                adequacao = (((double) getPasse() + getVelocidade() + getResistencia() + getDestreza())/(4*100))*lateralParaMedioConst;
                 break;
             case AVANCADO:
-                adequacao = (((double) velocidade + impulsao + remate + cabeca + destreza)/(5*100))*lateralParaAvancadoConst;
+                adequacao = (((double) getVelocidade() + getImpulsao() + getRemate() + getCabeca() + getDestreza())/(5*100))*lateralParaAvancadoConst;
                 break;
         }
         return adequacao;

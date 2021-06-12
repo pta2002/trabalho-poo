@@ -6,47 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Avancado extends Jogador {
-    /* ----------------------------------------------------------- Atributos */
-    /* TODO */
-
     /* ----------------------------------------------------------- Construtores */
-    public Avancado(){
-        this.nomeJogador = "unknown";
-        this.numeroJogador = 0;
-        this.velocidade = 50;
-        this.resistencia = 50;
-        this.destreza = 50;
-        this.impulsao = 50;
-        this.cabeca = 50;
-        this.remate = 50;
-        this.passe = 50;
-        this.historialEquipas = new ArrayList<>();
-    }
-
     public Avancado(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, List<String> e) {
-        this.nomeJogador = nomeJ;
-        this.numeroJogador = numeroJ;
-        this.velocidade = vel;
-        this.resistencia = res;
-        this.destreza = des;
-        this.impulsao = imp;
-        this.cabeca = cab;
-        this.remate = rem;
-        this.passe = p;
-        this.historialEquipas = new ArrayList<>(e);
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
     }
 
     public Avancado(Avancado avancado){
-        this.nomeJogador = avancado.getNomeJogador();
-        this.numeroJogador = avancado.getNumeroJogador();
-        this.velocidade = avancado.getVelocidade();
-        this.resistencia = avancado.getResistencia();
-        this.destreza = avancado.getDestreza();
-        this.impulsao = avancado.getImpulsao();
-        this.cabeca = avancado.getCabeca();
-        this.remate = avancado.getRemate();
-        this.passe = avancado.getPasse();
-        this.historialEquipas = avancado.getHistorialEquipas();
+        super(avancado);
     }
 
     /* ----------------------------------------------------------- Parsing */
@@ -87,13 +53,13 @@ public class Avancado extends Jogador {
 
         switch (posicao) {
             case GUARDA_REDES:
-                adequacao = (((double) impulsao + destreza) / (2 * 100)) * avancadoParaGuardaRedesConst;
+                adequacao = (((double) getImpulsao() + getDestreza()) / (2 * 100)) * avancadoParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = (((double) cabeca + impulsao + passe) / (3 * 100)) * avancadoParaDefesaConst;
+                adequacao = (((double) getCabeca() + getImpulsao() + getPasse()) / (3 * 100)) * avancadoParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = (((double) passe + velocidade + resistencia + destreza) / (4 * 100)) * avancadoParaMedioConst;
+                adequacao = (((double) getPasse() + getVelocidade() + getResistencia() + getDestreza()) / (4 * 100)) * avancadoParaMedioConst;
                 break;
             case AVANCADO:
                 adequacao = avancadoParaAvancadoConst;

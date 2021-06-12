@@ -9,12 +9,37 @@ import java.util.List;
 public abstract class Jogador implements Serializable {
 
     /* ----------------------------------------------------------- Atributos */
-    protected String nomeJogador;
-    protected int numeroJogador;
-    protected int velocidade, resistencia, destreza, impulsao, cabeca, remate, passe;
-    protected List<String> historialEquipas;
+    private String nomeJogador;
+    private int numeroJogador;
+    private int velocidade, resistencia, destreza, impulsao, cabeca, remate, passe;
+    private List<String> historialEquipas;
     private static final long serialVersionUID = 4L;
 
+    public Jogador(String nomeJogador, int numeroJogador, int velocidade, int resistencia, int destreza, int impulsao, int cabeca, int remate, int passe, List<String> historialEquipas) {
+        this.nomeJogador = nomeJogador;
+        this.numeroJogador = numeroJogador;
+        this.velocidade = velocidade;
+        this.resistencia = resistencia;
+        this.destreza = destreza;
+        this.impulsao = impulsao;
+        this.cabeca = cabeca;
+        this.remate = remate;
+        this.passe = passe;
+        this.historialEquipas = new ArrayList<String>(historialEquipas);
+    }
+
+    public Jogador(Jogador jog) {
+        this.nomeJogador = jog.nomeJogador;
+        this.numeroJogador = jog.numeroJogador;
+        this.velocidade = jog.velocidade;
+        this.resistencia = jog.resistencia;
+        this.destreza = jog.destreza;
+        this.impulsao = jog.impulsao;
+        this.cabeca = jog.cabeca;
+        this.remate = jog.remate;
+        this.passe = jog.passe;
+        this.historialEquipas = new ArrayList<String>(jog.historialEquipas);
+    }
 
     /* ----------------------------------------------------------- Getter's e Setter's */
     public String getNomeJogador() {

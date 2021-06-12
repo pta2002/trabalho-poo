@@ -10,48 +10,15 @@ public class GuardaRedes extends Jogador {
     private int elasticidade;
 
     /* ----------------------------------------------------------- Construtores */
-    public GuardaRedes(){
-        this.nomeJogador = "unknown";
-        this.numeroJogador = 0;
-        this.velocidade = 50;
-        this.resistencia = 50;
-        this.destreza = 50;
-        this.impulsao = 50;
-        this.cabeca = 50;
-        this.remate = 50;
-        this.passe = 50;
-
-        this.historialEquipas = new ArrayList<>();
-
-        this.elasticidade = 50;
-    }
-
     public GuardaRedes (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int elast, List<String> e) {
-        this.nomeJogador = nomeJ;
-        this.numeroJogador = numeroJ;
-        this.velocidade = vel;
-        this.resistencia = res;
-        this.destreza = des;
-        this.impulsao = imp;
-        this.cabeca = cab;
-        this.remate = rem;
-        this.passe = p;
-        this.historialEquipas = new ArrayList<>(e);
-
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
         this.elasticidade = elast;
+
     }
 
     public GuardaRedes(GuardaRedes guardaRedes){
-        this.nomeJogador = guardaRedes.getNomeJogador();
-        this.numeroJogador = guardaRedes.getNumeroJogador();
-        this.velocidade = guardaRedes.getVelocidade();
-        this.resistencia = guardaRedes.getResistencia();
-        this.destreza = guardaRedes.getDestreza();
-        this.impulsao = guardaRedes.getImpulsao();
-        this.cabeca = guardaRedes.getCabeca();
-        this.remate = guardaRedes.getRemate();
-        this.passe = guardaRedes.getPasse();
-        this.historialEquipas = guardaRedes.getHistorialEquipas();
+        super(guardaRedes);
+        this.elasticidade = guardaRedes.getElasticidade();
     }
 
     /* ----------------------------------------------------------- Parsing */
@@ -104,13 +71,13 @@ public class GuardaRedes extends Jogador {
                 adequacao = redesParaGuardaRedesConst;
                 break;
             case DEFESA:
-                adequacao = (((double) cabeca + impulsao + passe)/(3*100))*redesParaDefesaConst;
+                adequacao = (((double) getCabeca() + getImpulsao() + getPasse())/(3*100))*redesParaDefesaConst;
                 break;
             case MEDIO:
-                adequacao = (((double) passe + velocidade + resistencia + destreza) / (4 * 100)) * redesParaMedioConst;
+                adequacao = (((double) getPasse() + getVelocidade() + getVelocidade() + getDestreza()) / (4 * 100)) * redesParaMedioConst;
                 break;
             case AVANCADO:
-                adequacao = (((double) velocidade + impulsao + remate + cabeca + destreza)/(5*100))*redesParaAvancadoConst;
+                adequacao = (((double) getVelocidade() + getImpulsao() + getRemate() + getCabeca() + getDestreza())/(5*100))*redesParaAvancadoConst;
                 break;
         }
         return adequacao;
