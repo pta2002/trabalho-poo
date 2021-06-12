@@ -428,7 +428,7 @@ public class Jogo implements Serializable {
 
                 if (!substituiu) {
                     // Se a mesma equipa esteve 30 segundos com a bola, significa que chegaram perto da baliza e podem tentar rematar!
-                    if (tempoComBola + tempoPassado > 30) {
+                    if (tempoComBola + tempoPassado > 45) {
                         if (getSetupComBola().getPosicaoJogador(jogadorEmPosse) != PosicaoJogador.AVANCADO) {
                             List<Integer> avancados = getSetupComBola().getAvancados();
                             int avancado = avancados.get(random.nextInt(avancados.size()));
