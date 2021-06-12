@@ -66,15 +66,15 @@ public class FXJogadoresView {
                         this.onEdit.run(j);
                 }
             });
-            if (!row.isEmpty()) {
-                MenuItem apagar = new MenuItem("Apagar");
-                apagar.setOnAction(event -> {
+            MenuItem apagar = new MenuItem("Apagar");
+            apagar.setOnAction(event -> {
+                if (!row.isEmpty()) {
                     Jogador j = row.getItem();
                     if (this.onApagar != null)
                         this.onApagar.run(j);
-                });
-                row.setContextMenu(new ContextMenu(apagar));
-            }
+                }
+            });
+            row.setContextMenu(new ContextMenu(apagar));
             return row;
         });
         return box;

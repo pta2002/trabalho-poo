@@ -16,7 +16,7 @@ public class App extends Application{
     //@Override
     public void start(Stage primaryStage) throws Exception {
         FootballManagerModel model = new FootballManagerModel();
-        Parser.loadDatabase(model, "logs.txt");
+//        Parser.loadDatabase(model, "logs.txt");
         FXFootballManagerView view = new FXFootballManagerView(primaryStage.getOwner());
 
         FXMLLoader uiLoader = new FXMLLoader(getClass().getResource("ui.fxml"));

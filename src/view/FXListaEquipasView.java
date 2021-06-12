@@ -1,10 +1,11 @@
 package view;
 
+import controller.interfaces.ICallbackUm;
 import controller.interfaces.ICallbackZero;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
+import model.Jogador.Jogador;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,13 +19,32 @@ public class FXListaEquipasView {
     }
 
     private ICallbackZero onAdicionar;
+    private ICallbackUm<String> onApagar;
 
     public void setEquipas(List<String> equipas) {
+        lista.setCellFactory(e -> {
+            ListCell<String> cell = new ListCell<>();
+            MenuItem apagar = new MenuItem("Apagar");
+            apagar.setOnAction(event -> {
+                if (!cell.isEmpty()) {
+                    String equipa = cell.getItem();
+                    if (this.onApagar != null)
+                        this.onApagar.run(equipa);
+                }
+            });
+            cell.setContextMenu(new ContextMenu(apagar));
+            cell.textProperty().bind(cell.itemProperty());
+            return cell;
+        });
         lista.getItems().setAll(equipas.stream().sorted().collect(Collectors.toList()));
     }
 
     public void setOnAdicionar(ICallbackZero onAdicionar) {
         this.onAdicionar = onAdicionar;
+    }
+
+    public void setOnApagar(ICallbackUm<String> onApagar) {
+        this.onApagar = onApagar;
     }
 
     public ObservableList<String> getEquipasSelecionadas() {

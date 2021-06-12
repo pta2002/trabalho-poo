@@ -155,4 +155,7 @@ public class FootballManagerModel implements Serializable {
           return r;
     }
 
+    public void removeEquipa(String equipa) {
+        this.equipas.remove(equipa);
+    }
 }

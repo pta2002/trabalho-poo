@@ -29,6 +29,11 @@ public class FXListaEquipasController {
                 error.show();
             }
         });
+
+        this.view.setOnApagar(equipa -> {
+            model.removeEquipa(equipa);
+            view.setEquipas(new ArrayList<>(model.getEquipas().keySet()));
+        });
     }
 
     /**
