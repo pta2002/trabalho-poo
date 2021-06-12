@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.collections.ListChangeListener;
+import javafx.scene.control.Alert;
 import model.Equipa.Equipa;
 import model.Exceptions.EquipaExisteException;
 import model.FootballManagerModel;
@@ -18,6 +19,16 @@ public class FXListaEquipasController {
         this.view = view;
 
         this.view.setEquipas(new ArrayList<>(model.getEquipas().keySet()));
+        this.view.setOnAdicionar(() -> {
+            try {
+                criarEquipa();
+            } catch (EquipaExisteException e) {
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Equipa já existe");
+                error.setHeaderText("Equipa já existe");
+                error.show();
+            }
+        });
     }
 
     /**
@@ -34,12 +45,13 @@ public class FXListaEquipasController {
 
     public void criarEquipa() throws EquipaExisteException {
         String equipa = this.view.getNomeNovaEquipa();
-        if(model.existeEquipa(equipa)) {
-            throw new EquipaExisteException();
-        }
-        else {
-            this.model.insereEquipa(equipa);
-            view.setEquipas(new ArrayList<>(model.getEquipas().keySet()));
+        if (equipa != null) {
+            if (model.existeEquipa(equipa)) {
+                throw new EquipaExisteException();
+            } else {
+                this.model.insereEquipa(equipa);
+                view.setEquipas(new ArrayList<>(model.getEquipas().keySet()));
+            }
         }
     }
 }

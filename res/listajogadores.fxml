@@ -32,7 +32,7 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="jogadores" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <TableView fx:id="jogadores" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
