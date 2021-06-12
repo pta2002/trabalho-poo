@@ -10,12 +10,6 @@ import view.FXFootballManagerView;
 
 public class App extends Application{
     public static void main(String[] args) throws LinhaIncorretaException {
- //       FootballManagerModel model = new FootballManagerModel();
-//        Parser.loadDatabase(model,"logs.txt");
-//        FootballManagerController controller = new FootballManagerController(new String[]{"Criar Jogador",
-//                "Criar equipa", "Efetuar transferências", "Inspecionar equipa", "Listar Equipas","Simular partida", "Gravar"});
-//        controller.executa(model);
-
         launch(args);
     }
 
