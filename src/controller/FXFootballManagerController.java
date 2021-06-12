@@ -2,27 +2,20 @@ package controller;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import model.FootballManagerModel;
-import view.FXEquipaView;
-import view.FXJogadoresView;
-import view.FXListaEquipasView;
-import view.FootballManagerView;
+import view.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class FXFootballManagerController implements ListChangeListener<String> {
     private FootballManagerModel model;
-    private FootballManagerView view;
+    private FXFootballManagerView view;
 
     private FXListaEquipasController equipasController;
     private FXEquipaController equipaController;
     private FXJogadoresController jogadoresController;
 
-    public FXFootballManagerController(FootballManagerModel model, FootballManagerView view) throws IOException {
+    public FXFootballManagerController(FootballManagerModel model, FXFootballManagerView view) throws IOException {
         this.model = model;
         this.view = view;
 
@@ -40,6 +33,16 @@ public class FXFootballManagerController implements ListChangeListener<String> {
         FXJogadoresView jogadoresView = new FXJogadoresView();
         jogadoresController = new FXJogadoresController(model, jogadoresView);
         this.view.addListaJogadores(jogadoresView.getNode());
+
+        this.view.setOnSimular(() -> {
+            FXSimulacaoView sv = new FXSimulacaoView();
+            FXSimulacaoController sc = new FXSimulacaoController(model, sv);
+            try {
+                sc.mostrarPopup();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void executa() {

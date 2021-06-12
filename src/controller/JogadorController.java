@@ -1,20 +1,19 @@
 package controller;
 
-import controller.interfaces.ICallbackUm;
 import controller.interfaces.ICallbackZero;
 import model.FootballManagerModel;
 import model.Jogador.Jogador;
-import view.JogadorView;
+import view.FXJogadorView;
 
 import java.io.IOException;
 
 public class JogadorController {
     private FootballManagerModel model;
-    private JogadorView view;
+    private FXJogadorView view;
     private String equipa;
     private ICallbackZero onGravar;
 
-    public JogadorController(FootballManagerModel model, JogadorView view, String equipa) {
+    public JogadorController(FootballManagerModel model, FXJogadorView view, String equipa) {
         this.model = model;
         this.view = view;
         this.equipa = equipa;

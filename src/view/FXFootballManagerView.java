@@ -1,5 +1,6 @@
 package view;
 
+import controller.interfaces.ICallbackZero;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -8,7 +9,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import model.Equipa.Equipa;
 
-public class FootballManagerView {
+public class FXFootballManagerView {
     @FXML
     private VBox equipas;
 
@@ -18,7 +19,9 @@ public class FootballManagerView {
     @FXML
     private VBox listaJogadores;
 
-    public FootballManagerView() {
+    private ICallbackZero onSimular;
+
+    public FXFootballManagerView() {
         equipas = new VBox();
         infoEquipa = new ScrollPane();
     }
@@ -29,6 +32,10 @@ public class FootballManagerView {
         VBox.setVgrow(lista, Priority.ALWAYS);
     }
 
+    public void setOnSimular(ICallbackZero onSimular) {
+        this.onSimular = onSimular;
+    }
+
     public void addInfoEquipa(Node equipa) {
         infoEquipa.setContent(equipa);
     }
@@ -37,5 +44,11 @@ public class FootballManagerView {
         jogadoresView.setFillWidth(true);
         VBox.setVgrow(listaJogadores, Priority.ALWAYS);
         listaJogadores.getChildren().add(jogadoresView);
+    }
+
+    @FXML
+    private void simular() {
+        if (this.onSimular != null)
+            this.onSimular.run();
     }
 }

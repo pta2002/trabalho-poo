@@ -1,12 +1,8 @@
 package controller;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import model.FootballManagerModel;
 import view.FXJogadoresView;
-import view.JogadorView;
+import view.FXJogadorView;
 
 import java.io.IOException;
 
@@ -21,7 +17,7 @@ public class FXJogadoresController {
 
         this.view.setCallback(v -> {
             if (this.equipa != null) {
-                JogadorView jv = new JogadorView();
+                FXJogadorView jv = new FXJogadorView();
                 JogadorController jc = new JogadorController(model, jv, this.equipa);
                 jc.setOnGravar(() -> this.setEquipa(equipa));
                 try {

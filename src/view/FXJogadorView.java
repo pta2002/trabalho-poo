@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JogadorView {
+public class FXJogadorView {
     @FXML
     private ChoiceBox<PosicaoJogador> posicaoJogador;
     @FXML
@@ -48,7 +48,7 @@ public class JogadorView {
 
     private ICallbackUm<Jogador> onGravar;
 
-    public JogadorView() {
+    public FXJogadorView() {
         loader = new FXMLLoader(getClass().getResource("/jogador.fxml"));
         loader.setController(this);
 
