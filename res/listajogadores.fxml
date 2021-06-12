@@ -22,7 +22,7 @@
                </padding>
             </Label>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="Adicionar">
+            <Button fx:id="adicionarJogador" mnemonicParsing="false" onAction="#adicionar" text="Adicionar">
                <font>
                   <Font size="18.0" />
                </font>

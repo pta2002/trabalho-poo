@@ -1,5 +1,6 @@
 package model.Jogador;
 
+import javafx.geometry.Pos;
 import model.Jogo.PosicaoJogador;
 
 import java.util.ArrayList;
@@ -81,5 +82,9 @@ public class GuardaRedes extends Jogador {
                 break;
         }
         return adequacao;
+    }
+
+    public PosicaoJogador getPosicao() {
+        return PosicaoJogador.GUARDA_REDES;
     }
 }

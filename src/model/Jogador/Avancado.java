@@ -67,4 +67,9 @@ public class Avancado extends Jogador {
         }
         return adequacao;
     }
+
+    @Override
+    public PosicaoJogador getPosicao() {
+        return PosicaoJogador.AVANCADO;
+    }
 }

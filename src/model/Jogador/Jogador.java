@@ -130,6 +130,8 @@ public abstract class Jogador implements Serializable {
 
     public abstract double getAdequacao(PosicaoJogador posicao);
 
+    public abstract PosicaoJogador getPosicao();
+
     /* ----------------------------------------------------------- Clone */
     @Override
     abstract public Jogador clone();

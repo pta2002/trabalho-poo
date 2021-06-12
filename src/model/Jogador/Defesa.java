@@ -67,4 +67,9 @@ public class Defesa extends Jogador {
 
         return adequacao;
     }
+
+    @Override
+    public PosicaoJogador getPosicao() {
+        return PosicaoJogador.DEFESA;
+    }
 }

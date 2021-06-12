@@ -83,4 +83,8 @@ public class Lateral extends Jogador {
         }
         return adequacao;
     }
+
+    public PosicaoJogador getPosicao() {
+        return PosicaoJogador.LATERAL;
+    }
 }

@@ -81,4 +81,8 @@ public class Medio extends Jogador {
         }
         return adequacao;
     }
+
+    public PosicaoJogador getPosicao() {
+        return PosicaoJogador.MEDIO;
+    }
 }
