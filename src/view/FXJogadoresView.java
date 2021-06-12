@@ -21,6 +21,7 @@ public class FXJogadoresView {
 
     FXMLLoader loader;
     private ICallbackUm<Void> callback;
+    private ICallbackUm<Jogador> onEdit;
 
     public FXJogadoresView() {
         loader = new FXMLLoader(getClass().getResource("/listajogadores.fxml"));
@@ -31,6 +32,10 @@ public class FXJogadoresView {
 
     public void setCallback(ICallbackUm<Void> callback) {
         this.callback = callback;
+    }
+
+    public void setOnEdit(ICallbackUm<Jogador> onEdit) {
+        this.onEdit = onEdit;
     }
 
     public VBox getNode() throws IOException {
@@ -46,6 +51,17 @@ public class FXJogadoresView {
         colunaHabilidade.setCellValueFactory(new PropertyValueFactory<>("habilidade"));
 
         jogadores.getColumns().addAll(colunaNumero, colunaPosicao, colunaNome, colunaHabilidade);
+        jogadores.setRowFactory(e -> {
+            TableRow<Jogador> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Jogador j = row.getItem();
+                    if (this.onEdit != null)
+                        this.onEdit.run(j);
+                }
+            });
+            return row;
+        });
         return box;
     }
 

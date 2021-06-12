@@ -13,6 +13,7 @@ public class JogadorController {
     private FXJogadorView view;
     private String equipa;
     private ICallbackZero onGravar;
+    private Jogador jogador;
 
     public JogadorController(FootballManagerModel model, FXJogadorView view, String equipa) {
         this.model = model;
@@ -34,15 +35,23 @@ public class JogadorController {
     }
 
     private void gravar(Jogador j) {
-        if (model.getEquipa(equipa).getJogador(j.getNumeroJogador()) != null) {
+        if (model.getEquipa(equipa).getJogador(j.getNumeroJogador()) != null && (jogador == null || jogador.getNumeroJogador() != j.getNumeroJogador())) {
             Alert err = new Alert(Alert.AlertType.ERROR);
             err.setTitle("Jogador já existe");
             err.setHeaderText("Já existe um jogador com este número");
             err.show();
         } else {
+            if (jogador != null) {
+                model.getEquipa(equipa).removeJogador(jogador);
+            }
             model.insereJogador(j, equipa);
             this.onGravar.run();
             view.fecha();
         }
+    }
+
+    public void setJogador(Jogador jogador) {
+        this.jogador = jogador;
+        this.view.setJogador(jogador);
     }
 }

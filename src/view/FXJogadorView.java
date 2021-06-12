@@ -1,11 +1,13 @@
 package view;
 
 import controller.interfaces.ICallbackUm;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Jogador.*;
@@ -42,8 +44,12 @@ public class FXJogadorView {
     private Label especialLabel;
     @FXML
     private TableView<EntradaHistorial> historialEquipas;
+    @FXML
+    private VBox painelHistorial;
 
     private List<String> equipas;
+
+    private Jogador jogador;
 
     private Stage popUp;
     private FXMLLoader loader;
@@ -63,6 +69,13 @@ public class FXJogadorView {
         this.equipas = new ArrayList<>(equipas);
     }
 
+    public void setJogador(Jogador j) {
+        if (j != null) {
+            jogador = j.clone();
+            popUp.setTitle("Editar jogador");
+        }
+    }
+
     public void setEspecial(String nome) {
         if (nome == null) {
             especialLabel.setVisible(false);
@@ -77,32 +90,32 @@ public class FXJogadorView {
     public void mostra() throws IOException {
         popUp.setScene(new Scene(loader.load()));
         posicaoJogador.getItems().addAll(PosicaoJogador.AVANCADO, PosicaoJogador.DEFESA, PosicaoJogador.MEDIO, PosicaoJogador.LATERAL, PosicaoJogador.GUARDA_REDES);
-        posicaoJogador.setValue(PosicaoJogador.AVANCADO);
+        if (this.jogador == null) {
+            posicaoJogador.setValue(PosicaoJogador.AVANCADO);
+            // Descobrir uma forma de desconder o historial
+        } else {
+            posicaoJogador.setValue(jogador.getPosicao());
+            velocidade.setValue(jogador.getVelocidade());
+            resistencia.setValue(jogador.getResistencia());
+            destreza.setValue(jogador.getDestreza());
+            impulsao.setValue(jogador.getImpulsao());
+            cabeca.setValue(jogador.getCabeca());
+            remate.setValue(jogador.getRemate());
+            passe.setValue(jogador.getPasse());
+            nomeJogador.setText(jogador.getNomeJogador());
+            numJogador.setText(Integer.toString(jogador.getNumeroJogador()));
 
-        TableColumn<EntradaHistorial, String> colunaEquipa = new TableColumn<>("Equipa");
-        colunaEquipa.setCellValueFactory(new PropertyValueFactory<>("equipa"));
-        TableColumn<EntradaHistorial, String> colunaNumero = new TableColumn<>("Nº");
-        colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+            TableColumn<EntradaHistorial, String> colunaEquipa = new TableColumn<>("Equipa");
+            colunaEquipa.setCellValueFactory(new PropertyValueFactory<>("equipa"));
+            TableColumn<EntradaHistorial, String> colunaNumero = new TableColumn<>("Nº");
+            colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 
-        posicaoJogador.setOnAction(e-> {
-            switch (posicaoJogador.getValue()) {
-                case GUARDA_REDES:
-                    setEspecial("Elasticidade");
-                    break;
-                case MEDIO:
-                    setEspecial("Recuperação");
-                    break;
-                case LATERAL:
-                    setEspecial("Cruzamento");
-                    break;
-                default:
-                    setEspecial(null);
-                    break;
-            }
-        });
+            historialEquipas.getColumns().addAll(colunaEquipa, colunaNumero);
+            historialEquipas.getItems().setAll(jogador.getHistorialEquipas());
+        }
 
-        historialEquipas.getColumns().addAll(colunaEquipa, colunaNumero);
-        setEspecial(null);
+        atualizarEspecial();
+        posicaoJogador.setOnAction(e -> this.atualizarEspecial());
 
         popUp.show();
     }
@@ -164,5 +177,22 @@ public class FXJogadorView {
     @FXML
     private void cancelar() {
         popUp.close();
+    }
+
+    private void atualizarEspecial() {
+        switch (posicaoJogador.getValue()) {
+            case GUARDA_REDES:
+                setEspecial("Elasticidade");
+                break;
+            case MEDIO:
+                setEspecial("Recuperação");
+                break;
+            case LATERAL:
+                setEspecial("Cruzamento");
+                break;
+            default:
+                setEspecial(null);
+                break;
+        }
     }
 }

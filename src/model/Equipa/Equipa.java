@@ -39,7 +39,9 @@ public class Equipa implements Serializable {
     }
 
     public void insereJogador(Jogador j) {
-        jogadores.put(j.getNumeroJogador(),j.clone());
+        Jogador jog = j.clone();
+        jog.addEquipa(getNome());
+        jogadores.put(jog.getNumeroJogador(),jog);
     }
 
     public String getNome(){
