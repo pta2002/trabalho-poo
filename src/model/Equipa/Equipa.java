@@ -54,7 +54,11 @@ public class Equipa implements Serializable {
             if (jogador instanceof Lateral) {total += ((Lateral) jogador).getHabilidade(); cont++;}
             if (jogador instanceof GuardaRedes) {total += ((GuardaRedes) jogador).getHabilidade(); cont++;}
         }
-        return total/cont;
+
+        if (cont != 0)
+            return total/cont;
+        else
+            return 0;
     }
 
     public double getMediosOverall() {
@@ -63,7 +67,10 @@ public class Equipa implements Serializable {
         for (Jogador jogador : this.jogadores.values()) {
             if (jogador instanceof Medio) {total += ((Medio) jogador).getHabilidade(); cont++;}
         }
-        return total/cont;
+        if (cont != 0)
+            return total/cont;
+        else
+            return 0;
     }
 
     public double getAvancadosOverall() {
@@ -72,7 +79,9 @@ public class Equipa implements Serializable {
         for (Jogador jogador : this.jogadores.values()) {
             if (jogador instanceof Avancado) {total += ((Avancado) jogador).getHabilidade(); cont++;}
         }
-        return total/cont;
+        if (cont != 0)
+            return total/cont;
+        else return 0;
     }
 
     public double getOverall() {

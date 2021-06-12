@@ -40,6 +40,22 @@ public class FXSimulacaoController {
                 e.printStackTrace();
             }
         });
+
+        this.view.setOnConfigFora(equipa -> {
+            FXSetUpView sv = new FXSetUpView(this.model.getEquipa(equipa));
+            FXSetUpController sc = new FXSetUpController(this.model.getEquipa(equipa), this.model, sv);
+            sc.setSetup(setupFora);
+            sc.setSubstituicoes(substituicoesFora);
+            sc.setOnGravar((substituicoes, setup) -> {
+                substituicoesFora = new HashMap<>(substituicoes);
+                setupFora = setup.clone();
+            });
+            try {
+                sc.mostraPopup();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void mostrarPopup() throws IOException {
