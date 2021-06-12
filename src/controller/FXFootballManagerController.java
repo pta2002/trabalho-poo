@@ -65,6 +65,7 @@ public class FXFootballManagerController implements ListChangeListener<String> {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir logs/ficheiro de objetos");
         fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Todos os ficheiros", "*.txt", "*.obj"),
                 new FileChooser.ExtensionFilter("Ficheiro de logs", "*.txt"),
                 new FileChooser.ExtensionFilter("Ficheiro de objetos", "*.obj"));
         File f = fileChooser.showOpenDialog(view.getRootWindow());
