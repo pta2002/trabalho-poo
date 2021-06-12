@@ -41,7 +41,7 @@
                        <RowConstraints />
                        <RowConstraints />
                        <RowConstraints />
-                       <RowConstraints />
+                       <RowConstraints fx:id="linhaElasticidade" />
                    </rowConstraints>
                    <children>
                        <Label text="Nome">
@@ -98,12 +98,12 @@
                            </font>
                        </Label>
                        <Slider fx:id="passe" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                       <Label text="Elasticidade" GridPane.rowIndex="9">
+                       <Label fx:id="especialLabel" text="Valor especial" GridPane.rowIndex="9">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="elasticidade" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                       <Slider fx:id="especial" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                    </children>
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
@@ -127,7 +127,10 @@
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></HBox>
-                   <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                   <TableView fx:id="historialEquipas" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy></TableView>
                </children>
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />

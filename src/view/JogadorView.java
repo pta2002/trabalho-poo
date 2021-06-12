@@ -1,15 +1,11 @@
 package view;
 
-import controller.interfaces.ICallbackDois;
 import controller.interfaces.ICallbackUm;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Jogador.*;
@@ -39,7 +35,11 @@ public class JogadorView {
     @FXML
     private Slider passe;
     @FXML
-    private Slider elasticidade;
+    private Slider especial;
+    @FXML
+    private Label especialLabel;
+    @FXML
+    private TableView<EntradaHistorial> historialEquipas;
 
     private List<String> equipas;
 
@@ -61,10 +61,47 @@ public class JogadorView {
         this.equipas = new ArrayList<>(equipas);
     }
 
+    public void setEspecial(String nome) {
+        if (nome == null) {
+            especialLabel.setVisible(false);
+            especial.setVisible(false);
+        } else {
+            especialLabel.setVisible(true);
+            especialLabel.setText(nome);
+            especial.setVisible(true);
+        }
+    }
+
     public void mostra() throws IOException {
         popUp.setScene(new Scene(loader.load()));
-        posicaoJogador.getItems().addAll(PosicaoJogador.GUARDA_REDES, PosicaoJogador.AVANCADO, PosicaoJogador.DEFESA, PosicaoJogador.MEDIO, PosicaoJogador.LATERAL);
+        posicaoJogador.getItems().addAll(PosicaoJogador.AVANCADO, PosicaoJogador.DEFESA, PosicaoJogador.MEDIO, PosicaoJogador.LATERAL, PosicaoJogador.GUARDA_REDES);
         posicaoJogador.setValue(PosicaoJogador.AVANCADO);
+
+        TableColumn<EntradaHistorial, String> colunaEquipa = new TableColumn<>("Equipa");
+        colunaEquipa.setCellValueFactory(new PropertyValueFactory<>("equipa"));
+        TableColumn<EntradaHistorial, String> colunaNumero = new TableColumn<>("Nº");
+        colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+
+        posicaoJogador.setOnAction(e-> {
+            switch (posicaoJogador.getValue()) {
+                case GUARDA_REDES:
+                    setEspecial("Elasticidade");
+                    break;
+                case MEDIO:
+                    setEspecial("Recuperação");
+                    break;
+                case LATERAL:
+                    setEspecial("Cruzamento");
+                    break;
+                default:
+                    setEspecial(null);
+                    break;
+            }
+        });
+
+        historialEquipas.getColumns().addAll(colunaEquipa, colunaNumero);
+        setEspecial(null);
+
         popUp.show();
     }
 
@@ -89,22 +126,20 @@ public class JogadorView {
             int cabeca = (int) this.cabeca.getValue();
             int remate = (int) this.remate.getValue();
             int passe = (int) this.passe.getValue();
-            int elasticidade = (int) this.elasticidade.getValue();
-            int recuperacao = 10; // TODO
-            int cruzamento = 10; // TODO
+            int especial = (int) this.especial.getValue();
 
             switch (posicaoJogador.getValue()) {
                case MEDIO:
-                    j = new Medio(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, recuperacao, new ArrayList<>());
+                    j = new Medio(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
                     break;
                 case DEFESA:
                     j = new Defesa(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, new ArrayList<>());
                     break;
                 case GUARDA_REDES:
-                    j = new GuardaRedes(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, elasticidade, new ArrayList<>());
+                    j = new GuardaRedes(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
                     break;
                 case LATERAL:
-                    j = new Lateral(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, cruzamento, new ArrayList<>());
+                    j = new Lateral(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
                     break;
                 default:
                     j = new Avancado(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, new ArrayList<>());
