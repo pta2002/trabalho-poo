@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import model.Equipa.Equipa;
 import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
-import model.LinhaIncorretaException;
+import model.Exceptions.LinhaIncorretaException;
 import model.Parser;
 import view.FXFootballManagerView;
 

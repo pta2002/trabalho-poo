@@ -64,7 +64,7 @@ public class SetupEquipa implements Serializable {
         this.noBanco = setup.getNoBanco();
     }
 
-    public SetupEquipa(Equipa equipa, ModeloTatico modeloTatico, ArrayList<Integer> titulares, ArrayList<Integer> noBanco) {
+    public SetupEquipa(Equipa equipa, ModeloTatico modeloTatico, List<Integer> titulares, List<Integer> noBanco) {
         this.equipa = equipa.clone();
         this.modeloTatico = modeloTatico;
         this.titulares = new ArrayList<>(titulares);
@@ -103,7 +103,9 @@ public class SetupEquipa implements Serializable {
     }
 
     public ModeloTatico getModeloTatico() {
-        return modeloTatico;
+        if (modeloTatico != null)
+            return modeloTatico.clone();
+        else return null;
     }
     public void setModeloTatico(ModeloTatico modeloTatico) {
         this.modeloTatico = modeloTatico;

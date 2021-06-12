@@ -38,7 +38,6 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.Pane?>
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.3-internal" xmlns:fx="http://javafx.com/fxml/1">
   <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
@@ -53,7 +52,7 @@
       <items>
         <VBox fx:id="equipas" maxWidth="400.0" prefHeight="200.0" prefWidth="300.0" />
         <ScrollPane fx:id="infoEquipa" prefHeight="-1.0" prefWidth="-1.0" />
-        <VBox fx:id="listaJogadores" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" />
+        <VBox fx:id="listaJogadores" maxHeight="1.7976931348623157E308" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" />
       </items>
     </SplitPane>
   </children>

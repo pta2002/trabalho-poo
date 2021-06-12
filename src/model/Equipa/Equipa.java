@@ -109,12 +109,9 @@ public class Equipa implements Serializable {
     /* ----------------------------------------------------------- toString */
     @Override
     public String toString(){
-        StringBuilder r = new StringBuilder("Equipa:" + nome + "\n");
-        for (Jogador j : jogadores.values()){
-            r.append(j.toString());
-        }
-        return r.toString();
+        return nome;
     }
+
     public List<Jogador> getJogadores() {
         return this.jogadores.values().stream().map(Jogador::clone).collect(Collectors.toList());
     }
