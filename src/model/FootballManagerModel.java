@@ -79,6 +79,9 @@ public class FootballManagerModel implements Serializable {
     public void setJogos(List<Jogo> jogos) {
         this.jogos = jogos.stream().map(Jogo::clone).collect(Collectors.toList());
     }
+    public void addJogo(Jogo jogo) {
+        this.jogos.add(jogo.clone());
+    }
     /* ---------------------------------------------------------- Retorna a equipa indicada pela key*/
     public Equipa getEquipa(String equipa) {
          return this.equipas.get(equipa);
@@ -87,6 +90,7 @@ public class FootballManagerModel implements Serializable {
     /* ---------------------------------------------------------- Insere Jogador numa equipa*/
     public void insereJogador(Jogador jog, String equipa) {
         Equipa value = this.equipas.get(equipa);
+        jog.addEquipa(equipa);
         value.insereJogador(jog);
         this.equipas.replace(equipa,value);
     }
