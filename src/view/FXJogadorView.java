@@ -21,6 +21,8 @@ public class FXJogadorView {
     @FXML
     private TextInputControl nomeJogador;
     @FXML
+    private TextInputControl numJogador;
+    @FXML
     private Slider velocidade;
     @FXML
     private Slider resistencia;
@@ -119,6 +121,15 @@ public class FXJogadorView {
             Jogador j;
 
             String nomeJogador = this.nomeJogador.getText();
+            int num = 0;
+            try {
+                num = Integer.parseInt(this.numJogador.getText());
+            } catch (NumberFormatException e) {
+                Alert err = new Alert(Alert.AlertType.ERROR);
+                err.setTitle("Número de jogador inválido");
+                err.setHeaderText("Número do jogador é inválido");
+                err.show();
+            }
             int velocidade = (int) this.velocidade.getValue();
             int resistencia = (int) this.resistencia.getValue();
             int destreza = (int) this.destreza.getValue();
@@ -130,19 +141,19 @@ public class FXJogadorView {
 
             switch (posicaoJogador.getValue()) {
                case MEDIO:
-                    j = new Medio(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
+                    j = new Medio(nomeJogador, num, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
                     break;
                 case DEFESA:
-                    j = new Defesa(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, new ArrayList<>());
+                    j = new Defesa(nomeJogador, num, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, new ArrayList<>());
                     break;
                 case GUARDA_REDES:
-                    j = new GuardaRedes(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
+                    j = new GuardaRedes(nomeJogador, num, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
                     break;
                 case LATERAL:
-                    j = new Lateral(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
+                    j = new Lateral(nomeJogador, num, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, especial, new ArrayList<>());
                     break;
                 default:
-                    j = new Avancado(nomeJogador, 10, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, new ArrayList<>());
+                    j = new Avancado(nomeJogador, num, velocidade, resistencia, destreza, impulsao, cabeca, remate, passe, new ArrayList<>());
                     break;
             }
 

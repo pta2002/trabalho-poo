@@ -42,6 +42,7 @@
                        <RowConstraints />
                        <RowConstraints />
                        <RowConstraints fx:id="linhaElasticidade" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
                    </rowConstraints>
                    <children>
                        <Label text="Nome">
@@ -56,60 +57,66 @@
                            </font>
                   </Label>
                        <ChoiceBox fx:id="posicaoJogador" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                       <Label text="Velocidade" GridPane.rowIndex="2">
+                       <Label text="Velocidade" GridPane.rowIndex="3">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="velocidade" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                       <Label text="Resistência" GridPane.rowIndex="3">
+                       <Slider fx:id="velocidade" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                       <Label text="Resistência" GridPane.rowIndex="4">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="resistencia" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                       <Label text="Destreza" GridPane.rowIndex="4">
+                       <Slider fx:id="resistencia" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                       <Label text="Destreza" GridPane.rowIndex="5">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="destreza" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                       <Label text="Impulsão" GridPane.rowIndex="5">
+                       <Slider fx:id="destreza" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                       <Label text="Impulsão" GridPane.rowIndex="6">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="impulsao" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                       <Label text="Cabeça" GridPane.rowIndex="6">
+                       <Slider fx:id="impulsao" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                       <Label text="Cabeça" GridPane.rowIndex="7">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="cabeca" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                       <Label text="Remate" GridPane.rowIndex="7">
+                       <Slider fx:id="cabeca" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                       <Label text="Remate" GridPane.rowIndex="8">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="remate" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                       <Label text="Passe" GridPane.rowIndex="8">
+                       <Slider fx:id="remate" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                       <Label text="Passe" GridPane.rowIndex="9">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="passe" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                       <Label fx:id="especialLabel" text="Valor especial" GridPane.rowIndex="9">
+                       <Slider fx:id="passe" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                       <Label fx:id="especialLabel" text="Valor especial" GridPane.rowIndex="10">
                            <font>
                                <Font name="System Bold" size="13.0" />
                            </font>
                        </Label>
-                       <Slider fx:id="especial" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                       <Slider fx:id="especial" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Label layoutX="10.0" layoutY="107.0" text="Número" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="numJogador" promptText="Número..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
                    </children>
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
                </GridPane>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+            <VBox fx:id="painelHistorial" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
                    <HBox maxWidth="1.7976931348623157E308">
                      <children>
