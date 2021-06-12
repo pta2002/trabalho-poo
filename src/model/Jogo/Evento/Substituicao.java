@@ -39,4 +39,8 @@ public class Substituicao extends EventoJogo {
     public String toString() {
         return "Substituição: " + this.equipa + " " + antes + " -> " + depois;
     }
+
+    public Substituicao clone() {
+        return new Substituicao(getTempo(), equipa, antes, depois);
+    }
 }

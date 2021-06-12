@@ -9,4 +9,8 @@ public class Intervalo extends EventoJogo {
     public String toString() {
         return "Intervalo";
     }
+
+    public Intervalo clone() {
+        return new Intervalo(getTempo());
+    }
 }

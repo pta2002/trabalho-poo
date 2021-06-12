@@ -18,6 +18,7 @@ public class SetupEquipa implements Serializable {
 
 
     public SetupEquipa(Equipa equipa) {
+        this.equipa = equipa.clone();
         this.modeloTatico = ModeloTatico.getRandomModeloTatico();
         List<Integer> list = equipa.getJogadores().stream().map(Jogador::getNumeroJogador).collect(Collectors.toList());
         //Collections.shuffle(list);

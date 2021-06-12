@@ -82,6 +82,20 @@ public class Jogo implements Serializable {
         passouIntervalo = false;
     }
 
+    public Jogo(String ec, String ef, LocalDate d, SetupEquipa casa, SetupEquipa fora, Map<Integer, Integer> sc, Map<Integer, Integer> sf) {
+        equipaCasa = ec;
+        equipaFora = ef;
+        date = d;
+        golosCasa = 0;
+        golosFora = 0;
+        setupEquipaCasa = casa.clone();
+        setupEquipaFora = fora.clone();
+        substituicoesCasa = new HashMap<>(sc);
+        substitucoesFora = new HashMap<>(sf);
+        random = new Random();
+        passouIntervalo = false;
+    }
+
     /**
      * Construtor de cópia de um jogo
      * @param jogo Jogo a copiar

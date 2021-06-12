@@ -45,4 +45,8 @@ public class Golo extends EventoJogo {
     public String toString() {
         return "Golo marcado por: " + equipaMarcou + " " + jogadorMarcou + " -> " + equipaSofreu;
     }
+
+    public Golo clone() {
+        return new Golo(this.getTempo(), equipaMarcou, jogadorMarcou, equipaSofreu);
+    }
 }

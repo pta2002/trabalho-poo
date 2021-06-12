@@ -20,4 +20,6 @@ public abstract class EventoJogo implements Serializable {
     public double getTempo() {
         return tempo;
     }
+
+    public abstract EventoJogo clone();
 }

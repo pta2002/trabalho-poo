@@ -55,4 +55,8 @@ public class PassagemBola extends EventoJogo {
     public String toString() {
         return "Passagem: " + equipaAntes + " " + jogadorAntes + " -> " + equipaDepois + " " + jogadorDepois;
     }
+
+    public PassagemBola clone() {
+        return new PassagemBola(getTempo(), equipaAntes, jogadorAntes, equipaAntes, jogadorDepois);
+    }
 }

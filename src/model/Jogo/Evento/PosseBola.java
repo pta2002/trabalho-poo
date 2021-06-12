@@ -1,5 +1,7 @@
 package model.Jogo.Evento;
 
+import javafx.geometry.Pos;
+
 /***
  * Representa uma equipa que acabou de opter posse de bola, por exemplo, ao começar o jogo.
  */
@@ -37,5 +39,9 @@ public class PosseBola extends EventoJogo {
 
     public String toString() {
         return "Posse: " + equipa + " " + jogador;
+    }
+
+    public PosseBola clone() {
+        return new PosseBola(getTempo(), equipa, jogador);
     }
 }
