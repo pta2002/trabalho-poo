@@ -1,8 +1,7 @@
 
-package model.Equipa;
+package model.Jogo;
+import model.Equipa.Equipa;
 import model.Jogador.*;
-import model.Jogo.ModeloTatico;
-import model.Jogo.PosicaoJogador;
 
 import java.io.Serializable;
 import java.util.*;

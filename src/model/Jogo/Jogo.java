@@ -1,7 +1,6 @@
 package model.Jogo;
 
 import model.Equipa.Equipa;
-import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
 import model.Jogador.Jogador;
 import model.Jogo.Evento.*;
