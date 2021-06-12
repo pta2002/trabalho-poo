@@ -26,7 +26,7 @@ public class FXJogadoresController {
     private void edit(Jogador jogador) {
         if (this.equipa != null) {
             FXJogadorView jv = new FXJogadorView();
-            JogadorController jc = new JogadorController(model, jv, this.equipa);
+            FXJogadorController jc = new FXJogadorController(model, jv, this.equipa);
             jc.setJogador(jogador);
             jc.setOnGravar(() -> this.setEquipa(equipa));
             try {

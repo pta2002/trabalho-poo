@@ -62,7 +62,7 @@ public class FXSetUpController {
         } catch (Exception e) {
             Alert erro = new Alert(Alert.AlertType.ERROR);
             erro.setTitle("Set up inválido");
-            erro.setContentText(e.getMessage());
+            erro.setHeaderText(e.getMessage());
             erro.show();
         }
     }

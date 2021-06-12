@@ -129,7 +129,7 @@
                            </HBox.margin>
                         </Label>
                         <Pane HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="Transferir" />
+                        <Button mnemonicParsing="false" onAction="#transferir" text="Transferir" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />

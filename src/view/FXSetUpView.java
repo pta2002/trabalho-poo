@@ -158,7 +158,7 @@ public class FXSetUpView {
                 || substituicoes.containsValue(substituirPor.getValue().getNumeroJogador())) {
             Alert e = new Alert(Alert.AlertType.ERROR);
             e.setTitle("Jogadores inválidos");
-            e.setContentText("Esta substituição é inválida");
+            e.setHeaderText("Esta substituição é inválida");
             e.show();
         } else {
             substituicoes.put(aSubstituir.getValue().getNumeroJogador(), substituirPor.getValue().getNumeroJogador());

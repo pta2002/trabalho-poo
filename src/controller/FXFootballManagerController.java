@@ -53,7 +53,7 @@ public class FXFootballManagerController implements ListChangeListener<String> {
             } catch (IOException e) {
                 Alert error = new Alert(Alert.AlertType.ERROR);
                 error.setTitle("Erro ao gravar");
-                error.setContentText(e.getMessage());
+                error.setHeaderText(e.getMessage());
                 error.show();
             }
         }
@@ -75,7 +75,7 @@ public class FXFootballManagerController implements ListChangeListener<String> {
             } catch (Exception e) {
                 Alert error = new Alert(Alert.AlertType.ERROR);
                 error.setTitle("Erro ao abrir ficheiro");
-                error.setContentText(e.getMessage());
+                error.setHeaderText(e.getMessage());
                 error.show();
             }
         }

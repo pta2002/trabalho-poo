@@ -1,6 +1,7 @@
 package view;
 
 import controller.interfaces.ICallbackUm;
+import controller.interfaces.ICallbackZero;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import model.Jogo.PosicaoJogador;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FXJogadorView {
     @FXML
@@ -55,6 +57,7 @@ public class FXJogadorView {
     private FXMLLoader loader;
 
     private ICallbackUm<Jogador> onGravar;
+    private ICallbackUm<Integer> onTransferir;
 
     public FXJogadorView() {
         loader = new FXMLLoader(getClass().getResource("/jogador.fxml"));
@@ -128,6 +131,10 @@ public class FXJogadorView {
         this.onGravar = onGravar;
     }
 
+    public void setOnTransferir(ICallbackUm<Integer> onTransferir) {
+        this.onTransferir = onTransferir;
+    }
+
     @FXML
     private void gravar() {
         if (this.onGravar != null) {
@@ -193,6 +200,17 @@ public class FXJogadorView {
             default:
                 setEspecial(null);
                 break;
+        }
+    }
+
+    @FXML
+    private void transferir() {
+        if (onTransferir != null && jogador != null) {
+            try {
+                onTransferir.run(Integer.parseInt(numJogador.getText()));
+            } catch (NumberFormatException e) {
+                onTransferir.run(jogador.getNumeroJogador());
+            }
         }
     }
 }
