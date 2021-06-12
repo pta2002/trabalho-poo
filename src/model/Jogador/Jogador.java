@@ -5,6 +5,7 @@ import model.Jogo.PosicaoJogador;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Jogador implements Serializable {
 
@@ -12,10 +13,10 @@ public abstract class Jogador implements Serializable {
     private String nomeJogador;
     private int numeroJogador;
     private int velocidade, resistencia, destreza, impulsao, cabeca, remate, passe;
-    private List<String> historialEquipas;
+    private List<EntradaHistorial> historialEquipas;
     private static final long serialVersionUID = 4L;
 
-    public Jogador(String nomeJogador, int numeroJogador, int velocidade, int resistencia, int destreza, int impulsao, int cabeca, int remate, int passe, List<String> historialEquipas) {
+    public Jogador(String nomeJogador, int numeroJogador, int velocidade, int resistencia, int destreza, int impulsao, int cabeca, int remate, int passe, List<EntradaHistorial> historialEquipas) {
         this.nomeJogador = nomeJogador;
         this.numeroJogador = numeroJogador;
         this.velocidade = velocidade;
@@ -25,7 +26,7 @@ public abstract class Jogador implements Serializable {
         this.cabeca = cabeca;
         this.remate = remate;
         this.passe = passe;
-        this.historialEquipas = new ArrayList<String>(historialEquipas);
+        this.historialEquipas = historialEquipas.stream().map(EntradaHistorial::clone).collect(Collectors.toList());
     }
 
     public Jogador(Jogador jog) {
@@ -38,7 +39,7 @@ public abstract class Jogador implements Serializable {
         this.cabeca = jog.cabeca;
         this.remate = jog.remate;
         this.passe = jog.passe;
-        this.historialEquipas = new ArrayList<String>(jog.historialEquipas);
+        this.historialEquipas = jog.getHistorialEquipas();
     }
 
     /* ----------------------------------------------------------- Getter's e Setter's */
@@ -114,16 +115,16 @@ public abstract class Jogador implements Serializable {
         this.passe = passe;
     }
 
-    public List<String> getHistorialEquipas() {
-        return new ArrayList<>(historialEquipas);
+    public List<EntradaHistorial> getHistorialEquipas() {
+        return this.historialEquipas.stream().map(EntradaHistorial::clone).collect(Collectors.toList());
     }
 
-    public void setHistorialEquipas(List<String> equipas) {
-        this.historialEquipas = new ArrayList<>(equipas);
+    public void setHistorialEquipas(List<EntradaHistorial> equipas) {
+        this.historialEquipas =  equipas.stream().map(EntradaHistorial::clone).collect(Collectors.toList());
     }
 
     public void addEquipa(String equipa) {
-        this.historialEquipas.add(equipa);
+        this.historialEquipas.add(new EntradaHistorial(equipa,numeroJogador));
     }
 
     public abstract double getHabilidade();

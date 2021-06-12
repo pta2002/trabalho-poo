@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Avancado extends Jogador {
     /* ----------------------------------------------------------- Construtores */
-    public Avancado(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, List<String> e) {
-        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
+    public Avancado(String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, List<EntradaHistorial> e) {
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,e);
     }
 
     public Avancado(Avancado avancado){

@@ -4,9 +4,7 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import model.FootballManagerModel;
-import model.LinhaIncorretaException;
 import view.*;
 
 import java.io.File;

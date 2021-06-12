@@ -11,8 +11,8 @@ public class Medio extends Jogador {
 
     /* ----------------------------------------------------------- Construtores */
     /* ----------------------------------------------------------- Getter's e Setter's */
-    public Medio (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int recup, List<String> e) {
-        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
+    public Medio (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int recup, List<EntradaHistorial> e) {
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,e);
         this.recuperacao = recup;
     }
 

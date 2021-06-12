@@ -8,6 +8,10 @@ public class EntradaHistorial {
         this.equipa = equipa;
         this.numero = numero;
     }
+    public EntradaHistorial(EntradaHistorial h) {
+        this.equipa = h.equipa;
+        this.numero = h.numero;
+    }
 
     public String getEquipa() {
         return equipa;
@@ -23,5 +27,9 @@ public class EntradaHistorial {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public EntradaHistorial clone() {
+        return new EntradaHistorial(this);
     }
 }

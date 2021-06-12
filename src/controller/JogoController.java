@@ -1,15 +1,14 @@
 package controller;
 
 import model.Equipa.Equipa;
-import model.Exceptions.Equipa.EquipaNaoExisteException;
-import model.Exceptions.Equipa.EquipasIguaisException;
+import model.Exceptions.EquipaNaoExisteException;
+import model.Exceptions.EquipasIguaisException;
 import model.FootballManagerModel;
 import model.Jogo.Evento.EventoJogo;
 import model.Jogo.Jogo;
 import model.Jogo.ModeloTatico;
 import view.JogoView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;

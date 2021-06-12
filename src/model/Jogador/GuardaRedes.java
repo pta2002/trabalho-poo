@@ -11,8 +11,8 @@ public class GuardaRedes extends Jogador {
     private int elasticidade;
 
     /* ----------------------------------------------------------- Construtores */
-    public GuardaRedes (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int elast, List<String> e) {
-        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
+    public GuardaRedes (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int elast, List<EntradaHistorial> e) {
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,e);
         this.elasticidade = elast;
 
     }

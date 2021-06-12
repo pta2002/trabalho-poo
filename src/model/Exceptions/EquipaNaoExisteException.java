@@ -1,4 +1,4 @@
-package model.Exceptions.Equipa;
+package model.Exceptions;
 
 public class EquipaNaoExisteException extends Exception{
     public EquipaNaoExisteException() {

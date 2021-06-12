@@ -1,6 +1,10 @@
 package model;
 
 import model.Equipa.Equipa;
+import model.Exceptions.EquipaNaoExisteException;
+import model.Exceptions.JogadorNaoEstaPresenteException;
+import model.Exceptions.LinhaIncorretaException;
+import model.Exceptions.NumeroJaOcupadoException;
 import model.Jogador.Jogador;
 import model.Jogo.Jogo;
 
@@ -99,6 +103,24 @@ public class FootballManagerModel implements Serializable {
         this.equipas.put(equipa,novaEquipa);
     }
 
+    public void transfereJogador(int numJogadorAtual, int numJogadorFuturo, String equipaSource, String equipaDest) throws EquipaNaoExisteException, JogadorNaoEstaPresenteException, NumeroJaOcupadoException {
+        if(!existeEquipa(equipaSource) || ! existeEquipa(equipaDest)) {
+            throw new EquipaNaoExisteException();
+        }
+        Equipa source = getEquipa(equipaSource);
+        Equipa dest = getEquipa(equipaDest);
+        if(!source.existeJogador(numJogadorAtual)) {
+            throw new JogadorNaoEstaPresenteException();
+        }
+        if(dest.existeJogador(numJogadorAtual))  {
+            throw new NumeroJaOcupadoException();
+        }
+        Jogador j = source.getJogador(numJogadorAtual);
+        j.addEquipa(equipaDest);
+        dest.insereJogador(j);
+        source.removeJogador(j);
+    }
+
     public void writeObjectFile(String filename) throws IOException {
         FileOutputStream fos = new FileOutputStream(filename);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -130,4 +152,5 @@ public class FootballManagerModel implements Serializable {
           }
           return r;
     }
+
 }

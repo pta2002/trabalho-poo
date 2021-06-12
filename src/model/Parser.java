@@ -1,10 +1,10 @@
 package model;
 
 import model.Equipa.Equipa;
+import model.Exceptions.LinhaIncorretaException;
 import model.Jogador.*;
 import model.Jogo.Jogo;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

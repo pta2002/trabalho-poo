@@ -11,8 +11,8 @@ public class Lateral extends Jogador {
 
     /* ----------------------------------------------------------- Construtores */
     /* ----------------------------------------------------------- Parsing */
-    public Lateral (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int cruzamento, List<String> e) {
-        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,new ArrayList<>(e));
+    public Lateral (String nomeJ, int numeroJ, int vel, int res, int des, int imp, int cab, int rem, int p, int cruzamento, List<EntradaHistorial> e) {
+        super(nomeJ,numeroJ,vel,res,des,imp,cab,rem,p,e);
         this.cruzamento = cruzamento;
     }
 
