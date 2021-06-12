@@ -1,6 +1,6 @@
 
 package model.Equipa;
-import model.Jogador.Jogador;
+import model.Jogador.*;
 import model.Jogo.ModeloTatico;
 import model.Jogo.PosicaoJogador;
 
@@ -21,10 +21,38 @@ public class SetupEquipa implements Serializable {
     public SetupEquipa(Equipa equipa) {
         this.modeloTatico = ModeloTatico.getRandomModeloTatico();
         List<Integer> list = equipa.getJogadores().stream().map(Jogador::getNumeroJogador).collect(Collectors.toList());
-        Collections.shuffle(list);
-        this.titulares = new ArrayList<>(list.subList(0,11));
+        //Collections.shuffle(list);
+        List<Integer> defesasTitulares = equipa.getJogadores().stream()
+                                                        .filter(jogador -> jogador instanceof Defesa || jogador instanceof Lateral)
+                                                        .limit(modeloTatico.getNumDefesas())
+                                                        .map(Jogador::getNumeroJogador).collect(Collectors.toList());
+
+        List<Integer> mediosTitulares = equipa.getJogadores().stream()
+                .filter(jogador -> jogador instanceof Medio)
+                .limit(modeloTatico.getNumMedios())
+                .map(Jogador::getNumeroJogador).collect(Collectors.toList());
+
+        List<Integer> avancadosTitulares = equipa.getJogadores().stream()
+                .filter(jogador -> jogador instanceof Avancado)
+                .limit(modeloTatico.getNumAvancados())
+                .map(Jogador::getNumeroJogador).collect(Collectors.toList());
+
+        this.titulares = new ArrayList<>();
+        titulares.addAll(defesasTitulares);
+        titulares.addAll(mediosTitulares);
+        titulares.addAll(avancadosTitulares);
+
+        int redes = equipa.getJogadores().stream()
+                .filter(j-> j instanceof GuardaRedes)
+                .limit(1)
+                .map(Jogador::getNumeroJogador).findAny().get();
+
+        titulares.add(redes);
+
         list.removeAll(this.titulares);
-        this.noBanco =  new ArrayList<>(list.subList(0,4));
+
+        this.noBanco = new ArrayList<>(list.subList(0,7));
+
         this.emCampo = new ArrayList<>(this.titulares);
     }
 

@@ -3,21 +3,25 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Equipa.Equipa;
+import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
 import model.LinhaIncorretaException;
 import model.Parser;
 import view.FXFootballManagerView;
 
-public class App extends Application {
+public class App extends Application{
     public static void main(String[] args) throws LinhaIncorretaException {
-//        Parser.loadDatabase(model);
+ //       FootballManagerModel model = new FootballManagerModel();
+//        Parser.loadDatabase(model,"logs.txt");
 //        FootballManagerController controller = new FootballManagerController(new String[]{"Criar Jogador",
 //                "Criar equipa", "Efetuar transferências", "Inspecionar equipa", "Listar Equipas","Simular partida", "Gravar"});
 //        controller.executa(model);
+
         launch(args);
     }
 
-    @Override
+    //@Override
     public void start(Stage primaryStage) throws Exception {
         FootballManagerModel model = new FootballManagerModel();
         Parser.loadDatabase(model, "logs.txt");
