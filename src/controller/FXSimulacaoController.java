@@ -1,7 +1,7 @@
 package controller;
 
-import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
+import model.Jogo.SetupEquipa;
 import view.FXSetUpView;
 import view.FXSimulacaoView;
 

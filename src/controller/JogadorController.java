@@ -1,6 +1,7 @@
 package controller;
 
 import controller.interfaces.ICallbackZero;
+import javafx.scene.control.Alert;
 import model.FootballManagerModel;
 import model.Jogador.Jogador;
 import view.FXJogadorView;
@@ -33,8 +34,15 @@ public class JogadorController {
     }
 
     private void gravar(Jogador j) {
-        model.insereJogador(j, equipa);
-        this.onGravar.run();
-        view.fecha();
+        if (model.getEquipa(equipa).getJogador(j.getNumeroJogador()) != null) {
+            Alert err = new Alert(Alert.AlertType.ERROR);
+            err.setTitle("Jogador já existe");
+            err.setHeaderText("Já existe um jogador com este número");
+            err.show();
+        } else {
+            model.insereJogador(j, equipa);
+            this.onGravar.run();
+            view.fecha();
+        }
     }
 }

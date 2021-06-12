@@ -3,11 +3,11 @@ package controller;
 import controller.interfaces.ICallbackDois;
 import javafx.scene.control.Alert;
 import model.Equipa.Equipa;
-import model.Equipa.SetupEquipa;
 import model.Exceptions.JogadoresInvalidosException;
 import model.Exceptions.SubstituicaoInvalidaException;
 import model.FootballManagerModel;
 import model.Jogo.ModeloTatico;
+import model.Jogo.SetupEquipa;
 import view.FXSetUpView;
 
 import java.io.IOException;

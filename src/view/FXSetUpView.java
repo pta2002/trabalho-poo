@@ -16,10 +16,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import model.Equipa.Equipa;
-import model.Equipa.SetupEquipa;
 import model.Jogador.Jogador;
 import model.Jogo.ModeloTatico;
 import model.Jogo.PosicaoJogador;
+import model.Jogo.SetupEquipa;
 
 import java.io.IOException;
 import java.text.NumberFormat;

@@ -3,8 +3,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Equipa.Equipa;
-import model.Equipa.SetupEquipa;
 import model.FootballManagerModel;
 import model.Exceptions.LinhaIncorretaException;
 import model.Parser;
