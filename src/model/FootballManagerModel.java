@@ -99,13 +99,14 @@ public class FootballManagerModel implements Serializable {
         this.equipas.put(equipa,novaEquipa);
     }
 
-    void writeObjectFile(String filename) throws IOException {
+    public void writeObjectFile(String filename) throws IOException {
         FileOutputStream fos = new FileOutputStream(filename);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this);
         oos.close();
     }
-    FootballManagerModel readObjectFile(String filename) throws IOException, ClassNotFoundException {
+
+    public static FootballManagerModel readObjectFile(String filename) throws IOException, ClassNotFoundException {
         FileInputStream fos = new FileInputStream(filename);
         ObjectInputStream oos = new ObjectInputStream(fos);
         FootballManagerModel r = (FootballManagerModel) oos.readObject();
@@ -113,7 +114,7 @@ public class FootballManagerModel implements Serializable {
         return r;
     }
 
-    FootballManagerModel load_from_file(String filename) throws IOException, ClassNotFoundException, LinhaIncorretaException {
+    public static FootballManagerModel load_from_file(String filename) throws IOException, ClassNotFoundException, LinhaIncorretaException {
           FootballManagerModel r ;
           String extension = "";
           int index;
@@ -125,7 +126,7 @@ public class FootballManagerModel implements Serializable {
           }
           else {
               r = new FootballManagerModel();
-              Parser.loadDatabase(r);
+              Parser.loadDatabase(r, filename);
           }
           return r;
     }

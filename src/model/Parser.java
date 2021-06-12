@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class Parser {
 
-    public static void loadDatabase(FootballManagerModel model) throws LinhaIncorretaException {
-        List<String> linhas = lerFicheiro("logs.txt");
+    public static void loadDatabase(FootballManagerModel model, String path) throws LinhaIncorretaException {
+        List<String> linhas = lerFicheiro(path);
 
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         List<Jogo> jogos = new ArrayList<>();

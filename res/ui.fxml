@@ -38,12 +38,13 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.Pane?>
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.3-internal" xmlns:fx="http://javafx.com/fxml/1">
   <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
          <items>
-            <Button mnemonicParsing="false" text="Abrir" />
-            <Button mnemonicParsing="false" text="Gravar" />
+            <Button mnemonicParsing="false" onAction="#abrir" text="Abrir" />
+            <Button mnemonicParsing="false" onAction="#gravar" text="Gravar" />
           <Button fx:id="simularButton" mnemonicParsing="false" onAction="#simular" text="Simular" />
             <Button mnemonicParsing="false" text="Histórico de jogos" />
          </items>
