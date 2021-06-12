@@ -36,7 +36,7 @@ public class FXJogadoresView {
         TableColumn<Jogador, Integer> colunaNumero = new TableColumn<>("Nº");
         colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numeroJogador"));
         TableColumn<Jogador, String> colunaNome = new TableColumn<>("Nome");
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nomeJogador"));
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nomeJogado"));
         TableColumn<Jogador, Double> colunaHabilidade = new TableColumn<>("Habilidade");
         colunaHabilidade.setCellValueFactory(new PropertyValueFactory<>("habilidade"));
 

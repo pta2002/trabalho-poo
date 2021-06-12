@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="300.0" xmlns="http://javafx.com/javafx/11.0.3-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXJogadorController">
+    <children>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+               <GridPane>
+                   <columnConstraints>
+                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   </columnConstraints>
+                   <rowConstraints>
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints />
+                       <RowConstraints />
+                       <RowConstraints />
+                       <RowConstraints />
+                       <RowConstraints />
+                       <RowConstraints />
+                   </rowConstraints>
+                   <children>
+                       <Label text="Nome">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <TextField fx:id="nomeJogador" promptText="Nome..." GridPane.columnIndex="1" />
+                       <Label text="Posição" GridPane.rowIndex="1">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                  </Label>
+                       <ChoiceBox fx:id="posicaoJogador" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                       <Label text="Velocidade" GridPane.rowIndex="2">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="velocidade" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                       <Label text="Resistência" GridPane.rowIndex="3">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="resistencia" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                       <Label text="Destreza" GridPane.rowIndex="4">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="destreza" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                       <Label text="Impulsão" GridPane.rowIndex="5">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="impulsao" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                       <Label text="Cabeça" GridPane.rowIndex="6">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="cabeca" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                       <Label text="Remate" GridPane.rowIndex="7">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="remate" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                       <Label text="Passe" GridPane.rowIndex="8">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="passe" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                       <Label text="Elasticidade" GridPane.rowIndex="9">
+                           <font>
+                               <Font name="System Bold" size="13.0" />
+                           </font>
+                       </Label>
+                       <Slider fx:id="elasticidade" blockIncrement="1.0" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                   </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+               </GridPane>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                   <HBox maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Label text="Histórico de Equipas">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" text="Transferir" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></HBox>
+                   <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </VBox>
+         </children>
+      </GridPane>
+          <HBox nodeOrientation="RIGHT_TO_LEFT">
+              <children>
+                  <Button fx:id="botaoGravar" mnemonicParsing="false" onAction="#gravar" text="Gravar">
+                      <HBox.margin>
+                          <Insets left="5.0" right="5.0" top="10.0" />
+                      </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+                      <HBox.margin>
+                          <Insets left="5.0" right="5.0" top="10.0" />
+                      </HBox.margin>
+                  </Button>
+              </children>
+          </HBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</VBox>
