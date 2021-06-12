@@ -17,6 +17,7 @@ public class EntradaHistorial {
         return equipa;
     }
 
+    
     public void setEquipa(String equipa) {
         this.equipa = equipa;
     }

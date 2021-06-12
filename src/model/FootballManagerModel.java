@@ -119,7 +119,6 @@ public class FootballManagerModel implements Serializable {
             throw new NumeroJaOcupadoException();
         }
         Jogador j = source.getJogador(numJogadorAtual);
-        j.addEquipa(equipaDest);
         dest.insereJogador(j);
         source.removeJogador(j);
     }
