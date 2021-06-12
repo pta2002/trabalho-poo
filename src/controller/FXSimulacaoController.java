@@ -100,6 +100,7 @@ public class FXSimulacaoController {
             pontuacao.setTitle("Resultados do jogo");
             pontuacao.setHeaderText("Jogo acabou em " + j.getGolosCasa() + "-" + j.getGolosFora());
             pontuacao.show();
+            model.addJogo(j.clone());
         }
     }
 

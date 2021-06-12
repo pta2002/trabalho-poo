@@ -24,6 +24,7 @@ public class FXFootballManagerView {
     private ICallbackZero onSimular;
     private ICallbackZero onAbrir;
     private ICallbackZero onGravar;
+    private ICallbackZero onHistorico;
 
     public FXFootballManagerView(Window rootWindow) {
         equipas = new VBox();
@@ -48,6 +49,10 @@ public class FXFootballManagerView {
 
     public void setOnGravar(ICallbackZero onGravar) {
         this.onGravar = onGravar;
+    }
+
+    public void setOnHistorico(ICallbackZero onHistorico) {
+        this.onHistorico = onHistorico;
     }
 
     public Window getRootWindow() {
@@ -81,5 +86,11 @@ public class FXFootballManagerView {
     private void gravar() {
         if (this.onGravar != null)
             this.onGravar.run();
+    }
+
+    @FXML
+    private void mostrarHistorico() {
+        if (this.onHistorico != null)
+            this.onHistorico.run();
     }
 }

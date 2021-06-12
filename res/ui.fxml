@@ -45,7 +45,7 @@
             <Button mnemonicParsing="false" onAction="#abrir" text="Abrir" />
             <Button mnemonicParsing="false" onAction="#gravar" text="Gravar" />
           <Button fx:id="simularButton" mnemonicParsing="false" onAction="#simular" text="Simular" />
-            <Button mnemonicParsing="false" text="Histórico de jogos" />
+            <Button mnemonicParsing="false" onAction="#mostrarHistorico" text="Histórico de jogos" />
          </items>
       </ToolBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">

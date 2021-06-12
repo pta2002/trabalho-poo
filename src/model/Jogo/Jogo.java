@@ -208,6 +208,14 @@ public class Jogo implements Serializable {
         this.ultimoEvento = ultimoEvento;
     }
 
+    public ModeloTatico getModeloCasa() {
+        return setupEquipaCasa.getModeloTatico();
+    }
+
+    public ModeloTatico getModeloFora() {
+        return setupEquipaFora.getModeloTatico();
+    }
+
     public static Jogo parse(String input){
         String[] campos = input.split(",");
         String[] data = campos[4].split("-");

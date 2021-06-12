@@ -2,13 +2,21 @@ package controller;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import model.FootballManagerModel;
+import model.Jogo.Jogo;
+import model.Jogo.ModeloTatico;
 import view.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class FXFootballManagerController implements ListChangeListener<String> {
     private FootballManagerModel model;
@@ -109,5 +117,34 @@ public class FXFootballManagerController implements ListChangeListener<String> {
 
         this.view.setOnGravar(this::gravar);
         this.view.setOnAbrir(this::abrir);
+        this.view.setOnHistorico(this::historico);
+    }
+
+    private void historico() {
+        Stage popup = new Stage();
+        TableView<Jogo> tabelaJogos = new TableView<>();
+        TableColumn<Jogo, LocalDate> data = new TableColumn<>("Data");
+        data.setCellValueFactory(new PropertyValueFactory<>("date"));
+        TableColumn<Jogo, String> equipaCasa = new TableColumn<>("Equipa casa");
+        equipaCasa.setCellValueFactory(new PropertyValueFactory<>("equipaCasa"));
+        TableColumn<Jogo, String> equipaFora = new TableColumn<>("Equipa fora");
+        equipaFora.setCellValueFactory(new PropertyValueFactory<>("equipaFora"));
+        TableColumn<Jogo, Integer> golosCasa = new TableColumn<>("Golos casa");
+        golosCasa.setCellValueFactory(new PropertyValueFactory<>("golosCasa"));
+        TableColumn<Jogo, Integer> golosFora = new TableColumn<>("Golos fora");
+        golosFora.setCellValueFactory(new PropertyValueFactory<>("golosFora"));
+        TableColumn<Jogo, ModeloTatico> modeloCasa = new TableColumn<>("Modelo Tático casa");
+        modeloCasa.setCellValueFactory(new PropertyValueFactory<>("modeloCasa"));
+        TableColumn<Jogo, ModeloTatico> modeloFora = new TableColumn<>("Modelo Tático fora");
+        modeloFora.setCellValueFactory(new PropertyValueFactory<>("modeloFora"));
+
+        tabelaJogos.getColumns().addAll(data, equipaCasa, modeloCasa, golosCasa, equipaFora, modeloFora, golosFora);
+        tabelaJogos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tabelaJogos.getItems().setAll(model.getJogos());
+
+        popup.setTitle("Historial de jogos");
+        popup.setScene(new Scene(tabelaJogos));
+        popup.show();
     }
 }
