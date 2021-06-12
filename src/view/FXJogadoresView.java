@@ -23,6 +23,7 @@ public class FXJogadoresView {
     FXMLLoader loader;
     private ICallbackUm<Void> callback;
     private ICallbackUm<Jogador> onEdit;
+    private ICallbackUm<Jogador> onApagar;
 
     public FXJogadoresView() {
         loader = new FXMLLoader(getClass().getResource("/listajogadores.fxml"));
@@ -37,6 +38,10 @@ public class FXJogadoresView {
 
     public void setOnEdit(ICallbackUm<Jogador> onEdit) {
         this.onEdit = onEdit;
+    }
+
+    public void setOnApagar(ICallbackUm<Jogador> onApagar) {
+        this.onApagar = onApagar;
     }
 
     public VBox getNode() throws IOException {
@@ -61,6 +66,15 @@ public class FXJogadoresView {
                         this.onEdit.run(j);
                 }
             });
+            if (!row.isEmpty()) {
+                MenuItem apagar = new MenuItem("Apagar");
+                apagar.setOnAction(event -> {
+                    Jogador j = row.getItem();
+                    if (this.onApagar != null)
+                        this.onApagar.run(j);
+                });
+                row.setContextMenu(new ContextMenu(apagar));
+            }
             return row;
         });
         return box;

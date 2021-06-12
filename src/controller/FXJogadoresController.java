@@ -21,6 +21,10 @@ public class FXJogadoresController {
         });
 
         this.view.setOnEdit(this::edit);
+        this.view.setOnApagar(j -> {
+            model.getEquipa(this.equipa).removeJogador(j);
+            setEquipa(equipa);
+        });
     }
 
     private void edit(Jogador jogador) {
