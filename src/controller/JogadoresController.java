@@ -76,7 +76,6 @@ public class JogadoresController extends Menu {
             equipaView.errosEquipa(1);
             equipa.delete(0,equipa.length());
             equipa.append(is.nextLine());
-
         }
 
         if (posicaoJ.toString().equals("GuardaRedes")) {

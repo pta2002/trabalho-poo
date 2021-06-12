@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.collections.ListChangeListener;
+import model.Equipa.Equipa;
+import model.Exceptions.EquipaExisteException;
 import model.FootballManagerModel;
 import view.FXListaEquipasView;
 
@@ -28,5 +30,16 @@ public class FXListaEquipasController {
 
     public List<String> getEquipasSelecionadas() {
         return this.view.getEquipasSelecionadas();
+    }
+
+    public void criarEquipa() throws EquipaExisteException {
+        String equipa = this.view.getNomeNovaEquipa();
+        if(model.existeEquipa(equipa)) {
+            throw new EquipaExisteException();
+        }
+        else {
+            this.model.insereEquipa(equipa);
+            view.setEquipas(new ArrayList<>(model.getEquipas().keySet()));
+        }
     }
 }

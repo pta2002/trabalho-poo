@@ -22,4 +22,8 @@ public class FXListaEquipasView {
     public ObservableList<String> getEquipasSelecionadas() {
         return lista.getSelectionModel().getSelectedItems();
     }
+
+    public String getNomeNovaEquipa() {
+        return null;
+    }
 }

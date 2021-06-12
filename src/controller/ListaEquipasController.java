@@ -1,5 +1,6 @@
 package controller;
 
+import model.Equipa.Equipa;
 import model.FootballManagerModel;
 import view.ListaEquipasView;
 
