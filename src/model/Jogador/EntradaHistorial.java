@@ -1,6 +1,8 @@
 package model.Jogador;
 
-public class EntradaHistorial {
+import java.io.Serializable;
+
+public class EntradaHistorial implements Serializable {
     private String equipa;
     private int numero;
 
